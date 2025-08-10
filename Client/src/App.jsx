@@ -14,7 +14,7 @@ const App = () => {
    <>
 
   <Routes>
-    <Route path = "/" element={<Login/>}/>
+    <Route path = "/login" element={<Login/>}/>
     <Route index element={<Feed/>}/>
     {/* for list of prople messages  */}
     <Route path="messages" element={<Messages/>}/>

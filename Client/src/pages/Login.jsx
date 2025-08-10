@@ -1,10 +1,15 @@
-import React from 'react'
+import { SignIn, SignUp} from '@clerk/clerk-react';
 
 const Login = () => {
   return (
-    <div>
-      Login
+    <>
+    <div className='flex  items-center justify-evenly h-screen bg-gray-100'>
+     <SignIn/>
+    
     </div>
+     
+     
+    </>
   )
 }
 
