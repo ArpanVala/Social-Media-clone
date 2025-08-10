@@ -1,0 +1,2 @@
+#1 created client folder with react + vite, added assets from GreatStack, added lucide-react, added Outfit font from google [All in client]
+#2 added tailwind css, react-router dom
