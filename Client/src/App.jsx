@@ -1,5 +1,3 @@
-import React from 'react'
-import { assets } from './assets/assets'
 import {Routes, Route} from 'react-router-dom'
 import Login from './pages/Login'
 import Feed from './pages/Feed'
@@ -8,13 +6,20 @@ import Connections from './pages/Connections'
 import Discover from './pages/Discover'
 import Profile from './pages/Profile'
 import CreatePost from './pages/CreatePost'
+import Signup from './pages/Signup'
+import Layout from './pages/Layout'
+import { useUser } from '@clerk/clerk-react'
 
 const App = () => {
+
+  const {user} = useUser();
   return (
    <>
 
   <Routes>
-    <Route path = "/login" element={<Login/>}/>
+    <Route path = "/sign-up" element={!user ? <Signup/> : <Layout/>}/>
+    <Route path = "/" element={!user ? <Login/> : <Layout/>}>
+    {/* for home feed */}
     <Route index element={<Feed/>}/>
     {/* for list of prople messages  */}
     <Route path="messages" element={<Messages/>}/>
@@ -30,8 +35,7 @@ const App = () => {
     <Route path="profile/:profileId" element={<Profile/>}/>
 
     <Route path="create-post" element={<CreatePost/>}/>
-
-
+    </Route>
     
   </Routes>
    </>

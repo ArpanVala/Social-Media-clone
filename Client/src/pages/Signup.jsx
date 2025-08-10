@@ -1,8 +1,8 @@
-import { SignIn, SignUp} from '@clerk/clerk-react';
+import { SignUp} from '@clerk/clerk-react';
 import { assets } from '../assets/assets';
 import { Atom } from 'lucide-react';
 
-const Login = () => {
+const Signup = () => {
   return (
     <>
     <div className='p-5 md:p-7 max-w-[1248px] mx-auto'>
@@ -25,7 +25,7 @@ const Login = () => {
       
       <section className=' flex-1 flex justify-center'>
 
-        <SignIn signUpUrl='/sign-up'/>
+        <SignUp signInUrl='/'/>
       </section>
 
     </main>
@@ -39,4 +39,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup
