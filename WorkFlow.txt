@@ -1,5 +1,7 @@
-#1 created client folder with react + vite, added assets from GreatStack, added lucide-react, added Outfit font from google [All in client]
+#1 created client folder with react + vite, added assets, added lucide-react, added Outfit font from google [All in client]
 #2 added tailwind css, react-router dom
 #3 added routes in app.jsx
 #4 added clerk [visited site, added new application and added signin using emial and gmail, then choose React and installed clerk package]
 #5 created login and signup pages with clerk components with functionalities
+
+#6 added sidebar + loading.jsx
