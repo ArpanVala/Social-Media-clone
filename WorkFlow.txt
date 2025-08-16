@@ -5,3 +5,5 @@
 #5 created login and signup pages with clerk components with functionalities
 
 #6 added sidebar[with user logout, user profile access] + loading.jsx
+
+#7 added stories section [with no onclick modal]

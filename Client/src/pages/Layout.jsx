@@ -6,7 +6,7 @@ import Loading from "../components/Loading"
 import { dummyUserData } from "../assets/assets"
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const user = dummyUserData
+  const user =  dummyUserData
   return (
     <>
     {
@@ -16,7 +16,7 @@ const Layout = () => {
     
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      <div className="flex-1">
+      <div className="flex-1 bg-gray-100">
         <Outlet />
       </div>
 
