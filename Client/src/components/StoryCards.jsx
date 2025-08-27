@@ -2,10 +2,13 @@ import { Plus } from "lucide-react"
 import { dummyStoriesData } from "../assets/assets";
 import { useEffect, useState } from "react";
 import moment from 'moment';
+import StoryModal from "./StoryModal";
 
 const StoryCards = () => {
 
     const [stories, setStories] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [viewStory, setViewStory] = useState(null);
 
     const fetchStories = async() => {
         setStories(dummyStoriesData);
@@ -22,7 +25,7 @@ const StoryCards = () => {
         <section className="flex gap-4 pb-5">
 
          {/* add story card  */}
-         <div className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-indigo-50 to-white">
+         <div onClick={() => setShowModal(true)} className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-indigo-50 to-white">
             <div className="h-full flex flex-col gap-4 justify-center items-center p-4">
                 <div className="bg-indigo-100 p-2 rounded-full">
                     <Plus className="text-indigo-500" />
@@ -41,11 +44,11 @@ const StoryCards = () => {
                 <img src={story.user.profile_picture} 
                 className="absolute top-3 left-3 size-8 z-10 rounded-full ring ring-gray-100 shadow" />
 
-                <p className="absolute top-18 left-3 text-white/60 text-sm truncate max-w-24">
+                <p className="absolute top-18 left-3 text-white/60 text-sm truncate max-w-24 z-10">
                   {story.content}
                 </p>
 
-                 <p className="absolute bottom-2 right-2  text-white/85 text-xs">
+                 <p className="absolute bottom-2 right-2  text-white/85 text-xs z-10">
                   {moment(story.createdAt).fromNow()}
                 </p>
                 {
@@ -68,9 +71,11 @@ const StoryCards = () => {
                 </div>
             ))
          }
-
-
         </section>
+
+        {/* add story modal  */}
+        { showModal && <StoryModal setShowModal={setShowModal} fetchStories={fetchStories} />}
+
 
     </div>
     </>

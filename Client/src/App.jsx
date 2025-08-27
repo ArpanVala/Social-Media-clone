@@ -9,13 +9,14 @@ import CreatePost from './pages/CreatePost'
 import Signup from './pages/Signup'
 import Layout from './pages/Layout'
 import { useUser } from '@clerk/clerk-react'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
 
   const {user} = useUser();
   return (
    <>
-
+  <Toaster/>
   <Routes>
     <Route path = "/sign-up" element={!user ? <Signup/> : <Layout/>}/>
     <Route path = "/" element={!user ? <Login/> : <Layout/>}>

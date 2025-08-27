@@ -7,3 +7,5 @@
 #6 added sidebar[with user logout, user profile access] + loading.jsx
 
 #7 added stories section [with no onclick modal]
+
+#8 created 'storyModal' for adding story + added react-hot-toast
