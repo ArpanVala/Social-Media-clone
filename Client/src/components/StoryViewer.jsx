@@ -1,7 +1,36 @@
 import { X } from 'lucide-react';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const StoryViewer = ({ viewStory, setViewStory }) => {
+    const [progress, setProgress] = useState(0);
+
+    // for progress bar 
+    useEffect(() => {
+       let timer, progressInterval;
+       if(viewStory && viewStory.media_type != 'video'){
+        setProgress(0);
+        
+        const duration = 10000; //10 secs
+        const setTime = 100; //interval
+        let elapsed = 0;
+        //for progress bar
+        progressInterval = setInterval(()=> {
+            elapsed += setTime;
+            setProgress((elapsed / duration) * 100);
+        }, setTime);
+
+        //clsoe after 10 sec
+        timer = setTimeout(() => {
+            setViewStory(null);
+        }, duration)
+       }
+
+       return () => {
+           clearInterval(progressInterval);
+           clearTimeout(timer);
+       };
+    }, [viewStory,setViewStory]);
+
     const handleClose = () => {
         setViewStory(null);
     }
@@ -32,7 +61,7 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
 
     {/* progress bar  */}
     <div className=' absolute top-0 left-0 w-full h-1 bg-gray-500 '>
-        <div className='h-full bg-white  transition-all linear duration-100' style={{width: '50%'}}>
+        <div className='h-full bg-white  transition-all linear duration-100' style={{width: `${progress}%`}}>
 
         </div>
     </div>    

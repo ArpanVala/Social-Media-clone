@@ -10,4 +10,4 @@
 
 #8 created 'storyModal' for adding story + added react-hot-toast
 
-#9 created working storyViewer
+#9 created working storyViewer + progess bar init and removed scrollbar
