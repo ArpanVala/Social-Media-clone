@@ -9,3 +9,5 @@
 #7 added stories section [with no onclick modal]
 
 #8 created 'storyModal' for adding story + added react-hot-toast
+
+#9 created working storyViewer
