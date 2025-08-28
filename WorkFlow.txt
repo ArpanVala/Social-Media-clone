@@ -11,3 +11,4 @@
 #8 created 'storyModal' for adding story + added react-hot-toast
 
 #9 created working storyViewer + progess bar init and removed scrollbar
+#10 postcard added [without like, share and action]
