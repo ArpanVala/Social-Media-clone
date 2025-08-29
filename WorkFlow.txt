@@ -14,3 +14,5 @@
 #10 postcard added with like, share and action
 
 #11 goalSetter ad card added +  added recent messages card in feed page.
+#12 Messages page created
+#12 Connections page creted
