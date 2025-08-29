@@ -2,11 +2,14 @@ import { BadgeCheck, Heart, HeartIcon, MessageCircle, Share, Share2 } from 'luci
 import moment from 'moment'
 import React, { useState } from 'react'
 import { dummyUserData } from '../assets/assets';
+import { useNavigate } from 'react-router-dom'
 
 const PostCard = ({post}) => {
     const postWithHashtags = post.content.replace(/(#\w+)/g, '<span class=" font-medium text-indigo-500">$1</span>');
     const [likes,setLikes] = useState(post.likes_count);
     const currentUser = dummyUserData;
+
+    const navigate = useNavigate();
 
     const handleLike = async() => {
         if(likes.includes(currentUser._id)){
@@ -22,7 +25,9 @@ const PostCard = ({post}) => {
     <div className='shadow bg-white p-4 rounded-lg space-y-3  w-full max-w-2xl'>
         
         {/* user info  */}
-        <div className='inline-flex items-center gap-3 cursor-pointer'>
+        <div className='inline-flex items-center gap-3 cursor-pointer'
+        onClick={()=>navigate(`/profile/${post.user._id}`)}
+        >
            <img src={post.user.profile_picture} alt="user" className='w-10 h-10 rounded-full shadow' />
            <div>
                 <div className='flex items-center gap-1'>

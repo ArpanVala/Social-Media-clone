@@ -25,7 +25,7 @@ const App = () => {
     {/* for list of prople messages  */}
     <Route path="messages" element={<Messages/>}/>
     {/* for individual message thread */}
-    <Route path="meassages/:userId" element={<Messages/>}/>
+    <Route path="messages/:userId" element={<Messages/>}/>
 
     <Route path="connections" element={<Connections/>}/>
     <Route path="discover" element={<Discover/>}/>

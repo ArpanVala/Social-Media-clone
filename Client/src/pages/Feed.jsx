@@ -10,8 +10,6 @@ import RecentMessages from '../components/RecentMessages';
 const Feed = () => {
   const [feeds, setFeeds] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
 
   //fech posts
   const fetchFeeds = async() => {
