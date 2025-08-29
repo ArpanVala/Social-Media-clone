@@ -13,4 +13,4 @@
 #9 created working storyViewer + progess bar init and removed scrollbar
 #10 postcard added with like, share and action
 
-#11 goalSetter ad card added
+#11 goalSetter ad card added +  added recent messages card in feed page.
