@@ -18,3 +18,4 @@
 #12 Connections page creted
 
 #13 Connection page completed
+#14 Discover page  completed
