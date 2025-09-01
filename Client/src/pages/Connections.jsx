@@ -7,7 +7,7 @@ import {
   dummyFollowingData as following,
   dummyPendingConnectionsData as pendingConnections
 } from '../assets/assets'
-import { UserCheck, UserPlus, UserRoundPen, Users } from 'lucide-react'
+import { MessageCircle, UserCheck, UserPlus, UserRoundPen, Users } from 'lucide-react'
 
 const Connections = () => {
   const [currentTab, setCurrentTab] = React.useState('Followers');
@@ -61,6 +61,63 @@ const Connections = () => {
             ))
           }
           </div>
+          
+          {/* connections  */}
+          <div className='flex flex-wrap gap-6 mt-8'>
+          {
+            dataArray.find((item)=> item.label === currentTab)?.value.map((user) => (
+              <div className='bg-white shadow-md rounded-md max-w-88 flex gap-5 w-full p-5' key={user._id}>
+                <img src={user.profile_picture} alt="profile picture" className='w-12 h-12 rounded-full shadow-md ' />
+                <div className='flex-1 text-sm'>
+                  <p className='font-semibold text-slate-700'>{user.full_name}</p>
+                  <p className='font-light text-slate-500'>@{user.username}</p>
+                  <p className='font-light text-slate-600'>{user.bio.slice(0, 50)}...</p>
+
+                  <div className='flex max-sm:flex-col gap-2 mt-4'>
+                {
+                <button className='w-full p-2 text-sm bg-gradient-to-r rounded-md from-indigo-500 to-purple-600  text-white transition active:scale-95 cursor-pointer' 
+                onClick={()=> navigate(`/profile/${user._id}`)}
+                >View Profile
+                </button>
+                
+                }
+                {
+                  currentTab === 'Following' && (
+                    <button className='w-full p-2 text-sm bg-slate-100 rounded-md hover:bg-slate-200 transition active:scale-95 cursor-pointer'>Unfollow
+                    </button>
+                  )
+                }
+
+                 {
+                  currentTab === 'Pending' && (
+                    <button className='w-full p-2 text-sm bg-slate-100 rounded-md hover:bg-slate-200 transition active:scale-95 cursor-pointer'>Accept
+                    </button>
+                  )
+                }
+
+                 {
+                  currentTab === 'Connections' && (
+                    <button className='w-full flex  items-center gap-2  justify-center p-2 text-sm bg-slate-100 rounded-md hover:bg-slate-200 transition active:scale-95 cursor-pointer'
+                    onClick={()=> navigate(`/messages/${user._id}`)}>
+                    <MessageCircle size={14}/>
+                    Message
+                    </button>
+                  )
+                }
+                
+
+
+                </div>
+                </div>
+
+                
+              
+              </div>
+            ))
+          }
+
+          </div>
+
 
           </div>
       </div>

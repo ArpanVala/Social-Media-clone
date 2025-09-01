@@ -16,3 +16,5 @@
 #11 goalSetter ad card added +  added recent messages card in feed page.
 #12 Messages page created
 #12 Connections page creted
+
+#13 Connection page completed
