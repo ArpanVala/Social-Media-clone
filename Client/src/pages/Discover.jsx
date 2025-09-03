@@ -24,7 +24,9 @@ const Discover = () => {
 
   return (
     <div className='max-h-screen'>
-      <div className='max-w-6xl mx-auto p-6'>
+      {/* <div className='max-w-6xl mx-auto p-6 relative h-[100vh] overflow-y-auto no-scrollbar'> */}
+
+      <div className='max-w-6xl mx-auto p-6 h-full'>
        {/* title  */}
         <div className='mb-8'>
           <h1 className='text-2xl font-semibold text-slate-800 '>Discover</h1>
