@@ -6,6 +6,7 @@ import Loading from "../components/Loading"
 import UserProfileinfo from "../components/UserProfileinfo";
 import PostCard from "../components/PostCard";
 import moment from "moment";
+import ProfileModal from "../components/ProfileModal";
 
 const Profile = () => {
   //if profileid is not found then means its personal profile
@@ -93,9 +94,7 @@ const Profile = () => {
       
           {/* Edit card  */}
           {
-            showEdit && <p>
-              Show edit
-            </p>
+            showEdit && <ProfileModal setShowEdit={setShowEdit} />
           }
     </div>
   ):
