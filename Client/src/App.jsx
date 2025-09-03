@@ -10,6 +10,7 @@ import Signup from './pages/Signup'
 import Layout from './pages/Layout'
 import { useUser } from '@clerk/clerk-react'
 import {Toaster} from 'react-hot-toast'
+import ChatBox from './pages/ChatBox'
 
 const App = () => {
 
@@ -25,7 +26,7 @@ const App = () => {
     {/* for list of prople messages  */}
     <Route path="messages" element={<Messages/>}/>
     {/* for individual message thread */}
-    <Route path="messages/:userId" element={<Messages/>}/>
+    <Route path="messages/:userId" element={<ChatBox/>}/>
 
     <Route path="connections" element={<Connections/>}/>
     <Route path="discover" element={<Discover/>}/>
