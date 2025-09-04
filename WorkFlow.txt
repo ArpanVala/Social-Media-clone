@@ -27,3 +27,4 @@
 [===== FRONTEND COMPLETED =====]
 
 #19 Server folder intitalized with npm init, packages added [express, mongoose, dotenv, multer, cors, nodemon]
+#20 DB setup
