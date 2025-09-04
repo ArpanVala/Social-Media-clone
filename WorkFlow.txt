@@ -24,3 +24,6 @@
 #16 create-post page created
 #17 ChaBox tMessages added
 #18  Profile page updated and "edit profile" added with ProfileModal [likes is remaining]
+[===== FRONTEND COMPLETED =====]
+
+#19 Server folder intitalized with npm init, packages added [express, mongoose, dotenv, multer, cors, nodemon]
