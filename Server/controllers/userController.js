@@ -1,0 +1,176 @@
+import imagekit from "../config/imageKit.js";
+import User from "../models/User.js";
+import fs from 'fs';
+
+//get user data
+export const getUserData = async(req, res) =>{
+    try {
+        const {userId} = await req.auth();
+        //check if user exists
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({success:false, message:'User not found'});
+        }
+        return res.status(200).json({success:true, user});
+    } catch (error) {
+        return res.status(500).json({success:false, message:error.message});
+    }
+}
+
+//update user data
+export const updateUserData = async(req, res) =>{
+    try {
+        const {userId} = await req.auth();
+
+        //check if user exists
+        const tempUser = await User.findById(userId);
+        if(!tempUser){
+            return res.status(404).json({success:false, message:'User not found'});
+        }
+
+        //retrive data from request body
+        const {full_name, username, bio, location} = req.body;
+
+        //check username is there, if not, assign default username
+        !username && (username = tempUser.username);
+
+        //check if username is taken 
+        if(username !== tempUser.username){
+
+            const user = await User.findOne({username});
+            if(user){
+                username = tempUser.username; //assign old username if new username is taken
+            }
+        }
+
+        const updatedData = {
+            username,
+            full_name: full_name || tempUser.full_name,
+            bio: bio || tempUser.bio,
+            location: location || tempUser.location,
+        }
+
+
+        const profile = req.files.profile && req.files.profile[0];
+        const cover = req.files.cover && req.files.cover[0];
+
+        //if profile or cover photo is present, upload to imagekit and get url
+        if(profile)
+        {
+            const buffer = fs.readFileSync(profile.path);
+            const response = await imagekit.upload({
+                file:buffer,
+                fileName: profile.originalname,
+                })
+            const url = imagekit.url({
+                path: response.filePath,
+                transformation:[
+                    {quality: 'auto'},
+                    {format: 'webp'},
+                    {width: '512'}
+                ]
+            })
+            updatedData.profile_picture = url;
+        }
+        if(cover)
+        {
+            const buffer = fs.readFileSync(cover.path);
+            const response = await imagekit.upload({
+                file:buffer,
+                fileName: cover.originalname,
+                })
+            const url = imagekit.url({
+                path: response.filePath,
+                transformation:[
+                    {quality: 'auto'},
+                    {format: 'webp'},
+                    {width: '1280'}
+                ]
+            })
+            updatedData.cover_photo = url;
+        }
+        const user = await User.findByIdAndUpdate(userId, updatedData, {new:true});
+        return res.status(200).json({success:true, user, message:'Profile updated successfully'});
+    } catch (error) {
+        return res.status(500).json({success:false, message:error.message});
+    }
+}
+
+//discover users/ search users
+export const discoverUsers = async(req, res) =>{
+    try {
+        const {input} = req.body;
+      
+        const allUsers = await User.find(
+            {
+                $or:[
+                    {username: new RegExp(input, 'i')},
+                    {full_name: new RegExp(input, 'i')},
+                    {bio: new RegExp(input, 'i')},
+                    {location: new RegExp(input, 'i')}
+                ]
+            }
+        )
+        return res.status(200).json({success:true, users: allUsers});
+    } catch (error) {
+        return res.status(500).json({success:false, message:error.message});
+    }
+}
+
+//follow user
+export const followUser = async(req, res) =>{
+    try {
+        const {userId} = await req.auth();
+        const {id} = req.body; //id of user to be followed
+
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({success:false, message:'User not found'});
+        }
+
+        //check if user alredy following
+        if(user.following.includes(id)){
+            return res.status(400).json({success:false, message:'You are already following this user'});
+        }
+        user.following.push(id);
+        await user.save();
+
+        // Add userId to the followers array of the user being followed
+        const toUser = await User.findById(id);
+        toUser.followers.push(userId);
+        await toUser.save();    
+
+       return res.status(200).json({success:true, message:'User followed successfully'});
+    } catch (error) {
+        return res.status(500).json({success:false, message:error.message});
+    }
+}
+
+//unfollow user
+export const unfollowUser = async(req, res) =>{
+    try {
+        const {userId} = await req.auth();
+        const {id} = req.body; //id of user to be followed
+
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({success:false, message:'User not found'});
+        }
+
+        //check if user not following
+        if(!user.following.includes(id)){
+            return res.status(400).json({success:false, message:'You are not following this user'});
+        }
+        user.following = user.following.filter(user => user != id);
+        await user.save();
+
+        // remove userId to the followers array of the user being followed
+        const toUser = await User.findById(id);
+        toUser.followers = toUser.followers.filter(follower => follower != userId);
+        await toUser.save();
+
+       return res.status(200).json({success:true, message:'User unfollowed successfully'});
+    } catch (error) {
+        return res.status(500).json({success:false, message:error.message});
+    }
+}

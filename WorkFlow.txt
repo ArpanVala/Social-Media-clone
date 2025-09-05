@@ -29,7 +29,9 @@
 #19 Server folder intitalized with npm init, packages added [express, mongoose, dotenv, multer, cors, nodemon]
 #20 DB setup, ingest setup
 
-#21 ating inngest functions for User.created/updated/deleted
+#21 adding inngest functions for User.created/updated/deleted
 #22 added vercel.json in both-end + backend deployed on vercel
 #23 inngest functions attached with inngest app using backend vercel URL + Clerk endpoints connected with Inngest. clerk api keys added in .env
 #24 clerk middlware added.
+#25 get/update user controller added. multer added in config/ . imagekit.io setup.
+#26 imagekit package added and setup in config/ and api keys added in .env . 
