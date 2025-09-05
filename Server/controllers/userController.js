@@ -29,7 +29,7 @@ export const updateUserData = async(req, res) =>{
         }
 
         //retrive data from request body
-        const {full_name, username, bio, location} = req.body;
+        let {full_name, username, bio, location} = req.body;
 
         //check username is there, if not, assign default username
         !username && (username = tempUser.username);
@@ -87,7 +87,7 @@ export const updateUserData = async(req, res) =>{
                     {width: '1280'}
                 ]
             })
-            updatedData.cover_photo = url;
+            updatedData.cover_picture = url;
         }
         const user = await User.findByIdAndUpdate(userId, updatedData, {new:true});
         return res.status(200).json({success:true, user, message:'Profile updated successfully'});
