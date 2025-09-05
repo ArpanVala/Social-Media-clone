@@ -31,3 +31,5 @@
 
 #21 ating inngest functions for User.created/updated/deleted
 #22 added vercel.json in both-end + backend deployed on vercel
+#23 inngest functions attached with inngest app using backend vercel URL + Clerk endpoints connected with Inngest. clerk api keys added in .env
+#24 clerk middlware added.
