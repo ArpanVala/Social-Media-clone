@@ -10,7 +10,7 @@ const syncUserCreation = inngest.createFunction(
     {event:'clerk/user.created'},
     async({event})=>{
 
-        const[id, email_addresses,first_name, last_name, image_url] = event.data;
+        const {id, email_addresses,first_name, last_name, image_url} = event.data;
 
         let username = email_addresses[0].email_address.split('@')[0]; //default username from email befor '@'
         const user = await User.findOne({username});
@@ -39,15 +39,15 @@ const syncUserUpdation = inngest.createFunction(
     {id :'update-user-from-clerk'},
     {event:'clerk/user.updated'},
     async ({event}) => {
-        const [id,email_addresses, first_name, last_name, image_url] = event.data;
+        const {id, email_addresses, first_name, last_name, image_url} = event.data;
         const updateduserData = {
             email:email_addresses[0].email_address,
             full_name:first_name + ' ' + last_name,
             profile_picture:image_url
         }
 
-        await User.findByIdAndDelete(id, updateduserData);
-      
+        await User.findByIdAndUpdate(id, updateduserData);
+
     }
 )
 
@@ -56,7 +56,7 @@ const syncUserDeletion = inngest.createFunction(
     {id: 'delete-user-with-clerk'},
     {event:'clerk/user.deleted'},
     async ({event})=>{
-        const [id] = event.data;
+        const {id} = event.data;
 
         await User.findByIdAndDelete(id);
         console.log('User deleted from MongoDB...');
