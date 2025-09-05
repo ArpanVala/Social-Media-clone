@@ -30,3 +30,4 @@
 #20 DB setup, ingest setup
 
 #21 ating inngest functions for User.created/updated/deleted
+#22 added vercel.json in both-end + backend deployed on vercel
