@@ -27,4 +27,6 @@
 [===== FRONTEND COMPLETED =====]
 
 #19 Server folder intitalized with npm init, packages added [express, mongoose, dotenv, multer, cors, nodemon]
-#20 DB setup
+#20 DB setup, ingest setup
+
+#21 ating inngest functions for User.created/updated/deleted
