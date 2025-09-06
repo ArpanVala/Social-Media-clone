@@ -37,3 +37,4 @@
 #26 imagekit package added and setup in config/ and api keys added in .env . 
 
 #27 3 connection related controller and routes added
+#28 nodemailer config added + Brevo SMTP API added + .env key added + inngest function added for sending request mail.

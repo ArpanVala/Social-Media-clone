@@ -1,5 +1,6 @@
 import { Inngest } from "inngest";
 import User from "../models/User.js";
+import sendEmail from "../config/nodeMailer.js"
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "atom-app" });
@@ -64,9 +65,42 @@ const syncUserDeletion = inngest.createFunction(
     }
 )
 
+//inngest function to send reminder when a new conncetion request is added
+const sendNewConnectionRequestReminder = inngest.createFunction(
+    {id: "send-new-connection-request-reminder"},
+    {event: "app/connection-request"},
+    async({event, step}) => {
+        const {connectionid} = event.data;
+
+        await step.run('send-connection-request-main',async()=>{
+            const connection = await Connection.findById(connectionid).populate('from_user_id to_user_id');
+
+            const subject = "New Connection Request -Atom Social Media";
+
+            const body = `
+                    <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2>Hi ${connection.to_user_id.full_name}, </h2>
+                    <p>You have a new connection request from ${connection.from_user_id.full_name} - @${connection.from_user_id.username}</p>
+                    <p>Click <a href="${process.env.FRONTEND_URL}/connections" style="color:#10b981;">here</a> to accept or reject the request</p>
+                    <br/>
+                    <p>Thanks, <br/>Atom Social - Stay Connected</p>
+                    </div>`;
+
+            await sendEmail({
+                to: connection.to_user_id.email,
+                subject,
+                body
+            })
+
+            return {message:"Reminder sent."}
+        })
+    }
+)
+
 // Create an empty array where we'll export future Inngest functions
 export const functions = [
     syncUserCreation,
     syncUserUpdation,
-    syncUserDeletion
+    syncUserDeletion,
+    sendNewConnectionRequestReminder
 ];
