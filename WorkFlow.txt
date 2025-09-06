@@ -35,3 +35,5 @@
 #24 clerk middlware added.
 #25 get/update user controller added. multer added in config/ . imagekit.io setup.
 #26 imagekit package added and setup in config/ and api keys added in .env . 
+
+#27 3 connection related controller and routes added
