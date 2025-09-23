@@ -38,3 +38,5 @@
 
 #27 3 connection related controller and routes added
 #28 nodemailer config added + Brevo SMTP API added + .env key added + inngest function added for sending request mail.
+
+#29 post model, post controller(getPost, likePost, getFeedPost), post router added
