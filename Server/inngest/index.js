@@ -71,10 +71,10 @@ const sendNewConnectionRequestReminder = inngest.createFunction(
     {id: "send-new-connection-request-reminder"},
     {event: "app/connection-request"},
     async({event, step}) => {
-        const {connectionid} = event.data;
+        const {connectionId} = event.data;
 
         await step.run('send-connection-request-main',async()=>{
-            const connection = await Connection.findById(connectionid).populate('from_user_id to_user_id');
+            const connection = await Connection.findById(connectionId).populate('from_user_id to_user_id');
 
             const subject = "New Connection Request -Atom Social Media";
 
