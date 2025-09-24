@@ -13,10 +13,10 @@ export const addUserStory = async (req, res) => {
 
         const media_url = '';
 
-        if(media_type == 'image' || media_type == 'video')
+        if(media_type === 'image' || media_type === 'video')
         {
-            const fileBuffer = fs.readFileSync(media.path);
             //upload to imagekit
+            const fileBuffer = fs.readFileSync(media.path);
             const response = await imagekit.upload({
                 file: fileBuffer,
                 fileName: media.originalname,

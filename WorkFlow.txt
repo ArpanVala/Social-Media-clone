@@ -40,3 +40,9 @@
 #28 nodemailer config added + Brevo SMTP API added + .env key added + inngest function added for sending request mail.
 
 #29 post model, post controller(getPost, likePost, getFeedPost), post router added
+#30 story model, controller, router added
+
+#31 inngest bf function for deleting story after 24hours (index.js and storyController)
+#32 Message model, controller, router added
+#33 inngest fun for sendNotificationForUnseenMessages
+#34 backend completed + inggest functions redeployed.
