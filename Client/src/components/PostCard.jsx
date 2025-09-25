@@ -3,6 +3,9 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import { useAuth } from '@clerk/clerk-react';
+import api from '../api/axios.js';
+import toast from 'react-hot-toast';
 
 const PostCard = ({post}) => {
     const postWithHashtags = post.content.replace(/(#\w+)/g, '<span class=" font-medium text-indigo-500">$1</span>');
@@ -11,14 +14,28 @@ const PostCard = ({post}) => {
 
     const navigate = useNavigate();
 
+    
+    const {getToken} = useAuth();
+
     const handleLike = async() => {
-        if(likes.includes(currentUser._id)){
-            //unlike
-            setLikes(likes.filter((id) => id !== currentUser._id));
-        } else {
-            //like
-            setLikes([...likes, currentUser._id]);
+        try {
+            const {data} = await api.post('/api/post/like', {postId: post._id},{
+                headers: { Authorization: `Bearer ${await getToken()}` }
+            })
+            if(data.success){
+                setLikes(prev =>{
+                    if(prev.includes(currentUser._id))
+                        return prev.filter(id => id !== currentUser._id);
+                    else
+                        return [...prev, currentUser._id];
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            throw new Error(error.message);
+            toast.error(error.message);
         }
+       
     }
 
   return (
