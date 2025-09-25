@@ -3,15 +3,61 @@ import { Image, X } from 'lucide-react';
 import {toast} from 'react-hot-toast';
 import Loading from '../components/Loading';
 import { useSelector } from 'react-redux';
+import { useAuth } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios.js';
 const CreatePost = () => {
+
   const user = useSelector((state) => state.user.value);
   const [content, setContent] = useState('');
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handlePost = async()=> { }
+  const {getToken} = useAuth();
+  const navigate = useNavigate();
+
+  const handlePost = async()=> {
+    if(!images.length && !content.trim())
+    {
+      return toast.error("Post can not be empty!");
+    }
+    setLoading(true);
+    const postType = images.length && content ? "text_with_image" : images.length ? "image" : "text";
+
+    try {
+      
+      const formData = new FormData();
+      formData.append('content', content); 
+      formData.append('post_type', postType);
+      images.forEach((img) => formData.append('images', img));
+
+      const {data} = await api.post('/api/post/add', formData, {
+        headers: { Authorization: `Bearer ${await getToken()}` }
+      });
+
+        if(data.success)
+        {
+          toast.success(data.message);
+        navigate('/');
+        }
+        else
+        {
+          console.log(data.message);
+          toast.error(data.message);
+          throw new Error(data.message);
+        }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      throw new Error(error.message);
+      
+    }
+    setLoading(false);
+  }
 
   return (
+
     <div className="min-h-screen bg-gray-100">
       <div className='max-w-6xl mx-auto p-6'>
          {/* title  */}
@@ -61,9 +107,7 @@ const CreatePost = () => {
             <input type="file" id="images" accept="images/*" hidden multiple onChange={(e) => setImages([...images, ...e.target.files])} />
 
             <button disabled={loading} onClick={()=> toast.promise(handlePost(),{
-              loading:"Publishing...",
-              success:"Post published successfully!",
-              error:"Failed to publish post."
+              loading:"Publishing..."
             })} className='px-4 py-1 rounded-md bg-indigo-600 text-white hover:scale-95 hover:shadow-lg transition duration-200 cursor-pointer'>Publish Post</button>
 
           </div>
