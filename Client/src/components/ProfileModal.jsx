@@ -2,22 +2,46 @@ import React from 'react'
 import { dummyUserData } from '../assets/assets'
 import { Pencil } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '@clerk/clerk-react';
+import { updateUser } from '../features/userSlice.js';
 
 const ProfileModal = ({ setShowEdit }) => {
-    const user = dummyUserData;
+    const user =  useSelector((state) => state.user.value);
+    const {getToken} = useAuth();
+    const dispatch = useDispatch();
 
     const [editInfo, setEditInfo] = React.useState({
       full_name: user.full_name,
       username: user.username,
       bio: user.bio,
       profile_picture: null,
-      cover_photo: null,
+      cover_picture: null,
       location: user.location
     });
 
     const handleSaveProfile= async(e) => {
-      e.preventDefault();
-        setShowEdit(false);
+        e.preventDefault();
+        try{
+            const userData = new FormData();
+            const {full_name, username, bio, profile_picture, cover_picture, location} = editInfo;
+            
+            userData.append('username', username);
+            userData.append('location', location);
+            userData.append('bio', bio);
+            userData.append('full_name', full_name);
+            profile_picture && userData.append('profile', profile_picture);
+            cover_picture && userData.append('cover', cover_picture);
+
+            const token = await getToken();
+            dispatch(updateUser({userData, token}))
+            
+            setShowEdit(false);
+
+        }
+        catch(err){
+            toast.error(err.message);
+        }
     }
 
   return (
@@ -27,9 +51,7 @@ const ProfileModal = ({ setShowEdit }) => {
                 <h1 className='text-2xl font-bold text-gray-900 mb-6'>Edit Profile</h1>
 
                 <form className='space-y-4' onSubmit={(e)=>{toast.promise(handleSaveProfile(e),{
-                    loading: 'Saving...',
-                    success: 'Profile updated successfully!',
-                    error: 'Error updating profile.'
+                    loading: 'Saving...'
                 })}}>
 
                     {/* profile pic  */}
@@ -56,11 +78,11 @@ const ProfileModal = ({ setShowEdit }) => {
                         <label htmlFor="cover_picture" className='block text-sm font-medium text-gray-700 mb-1'>
                             Cover Photo
                             <input type="file" accept='image/*' id="cover_picture" hidden className='w-full p-3 border border-gray-200 rounded-lg' 
-                                onChange={(e) => setEditInfo({...editInfo, cover_photo: e.target.files[0]})}
+                                onChange={(e) => setEditInfo({...editInfo, cover_picture: e.target.files[0]})}
                             />
                             <div className='group/cover relative'>
 
-                                <img src={editInfo.cover_photo ? URL.createObjectURL(editInfo.cover_photo) : user.cover_photo} alt="" 
+                                <img src={editInfo.cover_picture ? URL.createObjectURL(editInfo.cover_picture) : user.cover_picture} alt="" 
                                     className='w-80 h-40 rounded-lg bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 object-cover mt-2'
                                 />
                                 <div className='absolute hidden inset-0 bg-black/20 rounded-lg group-hover/cover:flex items-center justify-center'>

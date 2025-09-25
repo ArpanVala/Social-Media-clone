@@ -8,9 +8,16 @@ import PostCard from "../components/PostCard";
 import moment from "moment";
 import ProfileModal from "../components/ProfileModal";
 
+import { useAuth } from '@clerk/clerk-react'
+import api from "../api/axios.js";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+
 const Profile = () => {
   //if profileid is not found then means its personal profile
   const {profileId} = useParams();
+  const currentUser = useSelector((state) => state.user.value);
+  const {getToken} = useAuth();
 
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -20,14 +27,41 @@ const Profile = () => {
   //for displaying edit button on personal profile 
   const [showEdit, setShowEdit] = useState(false);
 
-  const fetchUser = async()=> {
-    setUser(dummyUserData);
-    setPosts(dummyPostsData);
+
+  const fetchUser = async(pId)=> {
+    const token = await getToken();
+    try {
+      console.log(pId)
+      const {data} = await api.post('/api/user/profile', {paramId: pId}, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if(data.success)
+      {
+        setUser(data.user);
+        setPosts(data.posts);
+      }
+      else
+      {
+        toast.error(data.message);
+      }
+      
+    } catch (error) {
+      toast.error(error.message);
+      
+    }
   }
 
   useEffect(()=>{
-    fetchUser();
-  },[])
+    if(profileId)
+    {
+       fetchUser(profileId);
+    }
+    else
+    {
+      fetchUser(currentUser._id);
+    }
+   
+  },[profileId, currentUser])
 
 
   return user ? (
@@ -37,7 +71,7 @@ const Profile = () => {
         <div className="bg-white rounded-3xl shadow overflow-hidden">
         {/* profile cover photo  */}
             <div className="h-40 md:h-56 bg-gradient-to-r from-indigo-200  via-purple-200 to-pink-200">
-              {user.cover_photo && <img src={user.cover_photo} alt="Profile Cover" className="w-full h-full object-cover" />}
+              {user.cover_picture && <img src={user.cover_picture} alt="Profile Cover" className="w-full h-full object-cover" />}
             </div>
             
             {/* profile info   */}

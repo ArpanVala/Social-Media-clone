@@ -7,7 +7,7 @@ import { getUserData, updateUserData, discoverUsers, followUser, unfollowUser, g
 import { getUserRecentMessages } from "../controllers/messageController.js";
 
 userRouter.get('/data', protect, getUserData);
-userRouter.put('/update', upload.fields([{ name: 'profile', maxCount: 1 }, { name: 'cover', maxCount: 1 }]), protect, updateUserData);
+userRouter.post('/update', upload.fields([{ name: 'profile', maxCount: 1 }, { name: 'cover', maxCount: 1 }]), protect, updateUserData);
 userRouter.post('/discover', protect, discoverUsers);
 userRouter.post('/follow', protect, followUser);
 userRouter.post('/unfollow', protect, unfollowUser);
