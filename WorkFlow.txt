@@ -52,5 +52,7 @@
 #36 craeted 2 reducers in userSlice and added user data in redux in app.jsx (useDispatcher)
 #37 fetched user data in multiple files with redux(useSelector) 
 #38 profile update linked with DB and frontend
-#39 create post mconnected with backend and DB
+#39 create post connected with backend and DB [fix only 4 iimages update]
+#40 update post fetching in feed
+
 

@@ -101,7 +101,7 @@ const CreatePost = () => {
           {/* bottom bar  */}
           <div className='flex items-center justify-between pt-3 border-t border-gray-300'>
             <label htmlFor='images' className='cursor-pointer flex items-center gap-2  text-sm text-gray-500 hover:text-gray-700 transition'>
-              <Image className='size-6'/>
+              <Image className='size-6'/><span className='text-xs text-red-700'>*add upto 4 images</span>
             </label>
 
             <input type="file" id="images" accept="images/*" hidden multiple onChange={(e) => setImages([...images, ...e.target.files])} />
