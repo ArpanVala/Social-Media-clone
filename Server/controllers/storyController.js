@@ -7,11 +7,11 @@ import { inngest } from "../inngest/index.js";
 //add story 
 export const addUserStory = async (req, res) => {
     try {
-        const {userid} = req.auth();
+        const {userId} = req.auth();
         const {content,  media_type, background_color} = req.body;
         const media = req.file;
 
-        const media_url = '';
+        let media_url = '';
 
         if(media_type === 'image' || media_type === 'video')
         {
@@ -25,7 +25,7 @@ export const addUserStory = async (req, res) => {
         }
 
         const story = await Story.create({
-            user:userid,
+            user:userId,
             content,
             media_url,
             media_type,

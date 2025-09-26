@@ -1,9 +1,11 @@
 import { Plus } from "lucide-react"
-import { dummyStoriesData } from "../assets/assets";
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import StoryModal from "./StoryModal";
 import StoryViewer from "./StoryViewer";
+import { useAuth } from "@clerk/clerk-react";
+import api from "../api/axios.js";
+import toast from "react-hot-toast";
 
 const StoryCards = () => {
 
@@ -11,13 +13,35 @@ const StoryCards = () => {
     const [showModal, setShowModal] = useState(false);
     const [viewStory, setViewStory] = useState(null);
 
+    const {getToken} = useAuth();
+
     const fetchStories = async() => {
-        setStories(dummyStoriesData);
+       
+        try {
+             const token = await getToken();
+            const {data} = await api.get('/api/story/get', {
+            headers: {Authorization : `Bearer ${token}`}
+        })
+        if(data.success)
+        {
+
+            setStories(data.stories);
+        }
+        else{
+            console.log(data.message);
+            toast.error(data.message);
+        }
+            
+        } catch (error) {
+            toast.error("An error occurred while fetching stories: " + error.message);
+            
+        }
+       
     }
 
     useEffect(() =>{
         fetchStories();
-    },[])
+    },[ ])
 
   return (
     <>

@@ -55,4 +55,5 @@
 #39 create post connected with backend and DB [fix only 4 iimages update]
 #40 update post fetching in feed
 
-
+#41 added backend and DB in storyModal to create stories
+#42 added backend in StoryCards to  fetch stories from DB
