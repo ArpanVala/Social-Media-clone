@@ -205,7 +205,7 @@ export const sendConnectionRequest = async(req, res) =>{
         //if connected already
         else if(connection && connection.status === 'accepted')
         {
-            return res.status(400).json({success:false, message:'You are already connected with this user'});
+            return res.json({success:false, message:'You are already connected with this user'});
         }
         else if(connection && connection.status === 'rejected')
         {
@@ -213,7 +213,7 @@ export const sendConnectionRequest = async(req, res) =>{
             await connection.save();
             return res.status(200).json({success:true, message:'Connection request pending'});
         }
-        return res.status(400).json({success:false, message:'Connection request already pending'});
+        return res.json({success:false, message:'Connection request already pending'});
 
     } catch (error) {
         res.status(500).json({success:false, message:error.message});
@@ -224,15 +224,17 @@ export const sendConnectionRequest = async(req, res) =>{
 export const getUserConnections = async(req, res) =>{
     try {
         const {userId}  = req.auth();
-       const user = await User.findById(userId).populate('conncections followers following');
+        // Populate correct field name: connections (typo fix)
+        const user = await User.findById(userId).populate('connections followers following');
 
-       const conncections = user.conncections;
-       const followers = user.followers;
-       const following = user.following;
+        const connections = user.connections;
+        const followers = user.followers;
+        const following = user.following;
 
        const pendingConnections = (await Connection.find({to_user_id:userId, status:'pending'}).populate('from_user_id')).map(conn => conn.from_user_id);
 
-       res.status(200).json({success:true, conncections, followers, following, pendingConnections});
+        // Return keys expected by frontend slice
+        res.status(200).json({ success: true, connections, followers, following, pendingConnections });
 
        
     } catch (error) {
@@ -255,11 +257,11 @@ export const acceptConnectionRequest = async(req, res) =>{
 
         //add to connections
         const user = await User.findById(userId);
-        user.conncections.push(id);
+        user.connections.push(id);
         await user.save();
         //add to connections
         const fromUser = await User.findById(id);
-        fromUser.conncections.push(userId);
+        fromUser.connections.push(userId);
         await fromUser.save();
 
         connection.status = 'accepted';

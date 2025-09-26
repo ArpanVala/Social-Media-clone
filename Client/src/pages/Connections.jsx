@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useAuth } from '@clerk/clerk-react'
 import { fetchConnections } from '../features/connectionSlice.js'
 import toast from 'react-hot-toast'
+import api from '../api/axios.js'
 
 const Connections = () => {
   const [currentTab, setCurrentTab] = React.useState('Followers');
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {getToken} = useAuth();
@@ -30,15 +32,17 @@ const Connections = () => {
         const {data} = await api.post('/api/user/unfollow', {id:userId}, {
           headers: { Authorization: `Bearer ${await getToken()}` }
         })
-        if(data.sucess)
+        if(data.success)
         {
           toast.success(data.message);
           dispatch(fetchConnections(await getToken()));
         }
         else{
           toast.error(data.message);
+          console.log(data);
         }
       } catch (error) {
+        console.log(error);
         toast.error(error.message);
       }
         
@@ -49,20 +53,21 @@ const Connections = () => {
   const acceptConnection = async(userId) => {
     {
       try {
-        
         const {data} = await api.post('/api/user/accept', {id:userId}, {
           headers: { Authorization: `Bearer ${await getToken()}` }
         })
-        if(data.sucess)
+        if(data.success)
         {
           toast.success(data.message);
           dispatch(fetchConnections(await getToken()));
         }
         else{
           toast.error(data.message);
+          console.log(data);
         }
       } catch (error) {
         toast.error(error.message);
+        console.log(error);
       }
         
       }
