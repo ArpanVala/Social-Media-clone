@@ -14,6 +14,7 @@ import ChatBox from './pages/ChatBox'
 import { useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import { fetchUser } from './features/userSlice.js'
+import { fetchConnections } from './features/connectionSlice'
 
 const App = () => {
 
@@ -28,6 +29,7 @@ const App = () => {
     {
       const token = await getToken();
       dispatch(fetchUser(token)); //fetch user details from backend
+      dispatch(fetchConnections(token)); //fetch user connections from backend
     }
     }
     fetchData();

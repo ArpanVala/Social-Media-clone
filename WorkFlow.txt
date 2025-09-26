@@ -57,3 +57,4 @@
 
 #41 added backend and DB in storyModal to create stories
 #42 added backend in StoryCards to  fetch stories from DB
+#43 connection page integrated with backend and DB
