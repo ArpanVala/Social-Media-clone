@@ -34,14 +34,15 @@ export const sseController = async(req, res) => {
 export const sendMessage = async(req, res) => {
     try {
 
-        const {userId} = req.params;
+        const {userId} = req.auth();
+        console.log("send message from user: " + userId);
         const { to_user_id, text} = req.body;
         const image = req.file;
 
         let media_url = '';
         let message_type = image ? 'image' : 'text';
         //use single quotes for characters and double quotes for strings
-        if(media_type === "image")
+        if(message_type === "image")
         {
             const fileBuffer = fs.readFileSync(image.path);
             const response = await imagekit.upload({
@@ -86,7 +87,6 @@ export const sendMessage = async(req, res) => {
 //get chat messages
 export const getChatMessages = async (req, res) => {
     try {
-
         const {userId} = req.auth();
         const {to_user_id} = req.params;
 
@@ -95,7 +95,7 @@ export const getChatMessages = async (req, res) => {
                 {from_user_id:userId, to_user_id},
                 {from_user_id:to_user_id, to_user_id:userId}
             ]
-        }).sort({created_at: -1});
+        }).sort({createdAt: -1});
         
         await Message.updateMany({from_user_id:to_user_id, to_user_id:userId}, {seen:true});
 
@@ -111,7 +111,7 @@ export const getChatMessages = async (req, res) => {
 export const getUserRecentMessages = async (req, res) => {
     try {
         const {userId} = req.auth();
-        const messages = await Message.find({from_user_id: userId}).populate('from_user_id to_user_id').sort({created_at: -1});
+        const messages = await Message.find({from_user_id: userId}).populate('from_user_id to_user_id').sort({createdAt: -1});
 
         res.json({success:true, messages});
         

@@ -31,7 +31,6 @@ const Profile = () => {
   const fetchUser = async(pId)=> {
     const token = await getToken();
     try {
-      console.log(pId)
       const {data} = await api.post('/api/user/profile', {paramId: pId}, {
         headers: { Authorization: `Bearer ${token}` },
       })

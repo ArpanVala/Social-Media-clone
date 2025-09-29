@@ -59,3 +59,5 @@
 #42 added backend in StoryCards to  fetch stories from DB
 #43 connection page integrated with backend and DB
 #44 follow user + single request sending/ accepting for connection
+#45 messages functionality added
+#46 chat functionality half done(send message stored in DB but gone on refresh page)
