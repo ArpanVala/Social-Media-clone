@@ -1,18 +1,60 @@
-import React, { useEffect } from 'react'
-import {  dummyRecentMessagesData } from '../assets/assets';
+import  { useEffect } from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { useAuth, useUser } from '@clerk/clerk-react';
+import api from '../api/axios';
+import toast from 'react-hot-toast';
 
 const RecentMessages = () => {
     const [messages, setMessages] = useState([]);
+    const {user} = useUser();
+    const {getToken} = useAuth();
 
     const getRecentMessages = async()=> {
-        setMessages(dummyRecentMessagesData);
+        try {
+            const token = await getToken();
+            const {data} = await api.get('/api/user/recent-messages', {
+                headers:{ Authorization: `Bearer ${token}`  }
+            })
+
+            if(data.success)
+            {
+                const groupMessages =data.messages.reduce((acc, message)=>{
+                    const senderId = message.from_user_id._id;
+                    if(!acc[senderId] || new Date(message.createdAt) > new Date(acc[senderId].createdAt))
+                    {
+                        acc[senderId] = message;
+                    }
+                    return acc;
+                 },{})
+
+                 //sort messages by date
+                 const sortedMessages = Object.values(groupMessages).sort((a, b)=> new Date(b.createdAt) - new Date(a.createdAt) )
+                 setMessages(sortedMessages);
+            }
+            else
+            {
+                console.log(data.messages);
+                toast.error(data.messages);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+       
     }
     useEffect(()=>{
-        getRecentMessages();
-    },[])
+        if(user)
+        {
+
+            getRecentMessages();
+            setInterval(getRecentMessages, 30000); //fetch recent messages every 30 seconds
+            return ()=> {clearInterval()}
+
+        }
+        
+    },[user])
 
   return (
     <div className='bg-white rounded-md shadow p-4 mt-4 max-w-xs min-h-20 text-xs text-slate-800 mb-4'>

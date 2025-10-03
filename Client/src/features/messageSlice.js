@@ -10,7 +10,10 @@ export const fetchMessages = createAsyncThunk('messages/fetchMessages', async({t
     const {data} = await api.post('/api/message/get', {to_user_id:userId}, {
         headers: {Authorization: `Bearer ${token}`}
     })
-    return data.success ? data : [];
+    if (!data || data.success !== true || !Array.isArray(data.messages)) {
+        return { success: false, messages: [] };
+    }
+    return data;
 })
 const messageSlice = createSlice({
     name: 'messages',
@@ -29,10 +32,7 @@ const messageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchMessages.fulfilled, (state, action) => {
-            if(action.payload)
-            {
-                state.messages = action.payload.messages;
-            }
+            state.messages = Array.isArray(action.payload?.messages) ? action.payload.messages : [];
         })
     }
 });

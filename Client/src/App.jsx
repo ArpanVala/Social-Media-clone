@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import Login from './pages/Login'
 import Feed from './pages/Feed'
 import Messages from './pages/Messages'
@@ -9,17 +9,22 @@ import CreatePost from './pages/CreatePost'
 import Signup from './pages/Signup'
 import Layout from './pages/Layout'
 import { useUser,useAuth } from '@clerk/clerk-react'
-import {Toaster} from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 import ChatBox from './pages/ChatBox'
 import { useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import { fetchUser } from './features/userSlice.js'
 import { fetchConnections } from './features/connectionSlice'
+import { useRef } from 'react'
+import { addMessage } from './features/messageSlice.js'
+import Notifications from './components/Notifications.jsx'
 
 const App = () => {
 
   const {user} = useUser();
   const {getToken} = useAuth();
+  const pathname = useLocation();
+  const pathnameref = useRef(pathname);
 
   const dispatch = useDispatch();
 
@@ -35,6 +40,37 @@ const App = () => {
     fetchData();
     
   },[user, getToken, dispatch])
+
+
+  useEffect(()=>{
+    pathnameref.current = pathname;
+  }, [pathname]);
+
+  useEffect(()=>{
+
+    if(user)
+    {
+      const eventSource = new EventSource(import.meta.VITE_BASEURL + '/api/message/' + user.id);
+      eventSource.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+
+        if(pathnameref.current === ('/messages/' + message.from_user_id._id))
+        {
+          // user is on the chat page of the sender or receiver
+          dispatch(addMessage(message));
+        }
+        else
+        {
+          // user is not on the chat page of the sender or receiver
+          toast.custom((t)=>(<Notifications t={t} message={message}/>),
+        {position: 'bottom-right'})
+        }
+      } 
+      return () =>{
+        eventSource.close();
+      }
+    }
+  },[])
 
   return (
    <>

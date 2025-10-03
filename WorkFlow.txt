@@ -61,3 +61,7 @@
 #44 follow user + single request sending/ accepting for connection
 #45 messages functionality added
 #46 chat functionality half done(send message stored in DB but gone on refresh page)
+
+#47 real time messaging(with bug) + notifying message if not on chat page.
+#48 recent message complonent implemented.
+#49 message/ chat problem solved (bug in 'recent messages' and realtime messaging + notifying message bug also)

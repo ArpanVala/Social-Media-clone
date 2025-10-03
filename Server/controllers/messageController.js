@@ -88,7 +88,12 @@ export const sendMessage = async(req, res) => {
 export const getChatMessages = async (req, res) => {
     try {
         const {userId} = req.auth();
-        const {to_user_id} = req.params;
+        // Client sends to_user_id in the request body
+        const { to_user_id } = req.body || {};
+
+        if (!to_user_id) {
+            return res.json({ success: false, message: 'to_user_id is required' });
+        }
 
         const messages = await Message.find({
             $or:[
