@@ -109,3 +109,22 @@ export const getLikedPosts = async (req, res) => {
         return res.status(500).json({ success: false, message: error.message });
     }
 }
+
+// Search/discover posts by content
+export const discoverPosts = async (req, res) => {
+    try {
+        const { input } = req.body;
+
+        // Search posts by content text
+        const posts = await Post.find({
+            content: new RegExp(input, 'i')
+        })
+            .populate('user')
+            .sort({ createdAt: -1 });
+
+        return res.status(200).json({ success: true, posts });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, message: error.message });
+    }
+}
