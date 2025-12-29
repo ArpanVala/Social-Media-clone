@@ -45,7 +45,7 @@ const PostCard = ({post}) => {
         <div className='inline-flex items-center gap-3 cursor-pointer'
         onClick={()=>navigate(`/profile/${post.user._id}`)}
         >
-           <img src={post.user.profile_picture} alt="user" className='w-10 h-10 rounded-full shadow' />
+           <img src={post.user.profile_picture} alt="user" className='w-10 h-10 rounded-full object-cover shadow' />
            <div>
                 <div className='flex items-center gap-1'>
                     <span>{post.user.full_name}</span>

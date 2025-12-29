@@ -284,7 +284,7 @@ export const getuserProfile = async (req, res) => {
         if(!user){
             return res.status(404).json({success:false, message:'Profile not found'});
         }  
-        const posts = await Post.find({user:paramId}).populate('user');
+        const posts = await Post.find({user:paramId}).populate('user').sort({createdAt: -1});
         res.status(200).json({success:true, user, posts});
     }
     catch(error){

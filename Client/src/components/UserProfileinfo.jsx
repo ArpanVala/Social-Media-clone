@@ -7,8 +7,8 @@ const UserProfileinfo = ({ posts, user, profileId, setShowEdit }) => {
       <div className='flex flex-col md:flex-row items-start gap-6'>
 
         {/* profile_picture */}
-        <div className="w-24 h-24 rounded-full  border-7 border-white absolute -top-14">
-          {user.profile_picture && <img src={user.profile_picture} alt="Profile" className="absolute rounded-full z-2 object-center" />}
+        <div className="w-24 h-24 rounded-full  border-[7px] border-white overflow-hidden absolute -top-14">
+          {user.profile_picture && <img src={user.profile_picture} alt="Profile" className=" w-full h-full rounded-full object-cover" />}
         </div>  
 
         {/* profile content  */}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { dummyUserData } from '../assets/assets'
 import { Pencil } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';

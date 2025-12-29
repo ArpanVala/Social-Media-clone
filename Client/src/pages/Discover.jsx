@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { dummyConnectionsData } from '../assets/assets';
 import { Search } from 'lucide-react';
 import UserCard from '../components/UserCard';
 import Loading from '../components/Loading';
@@ -9,17 +8,20 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchUser } from '../features/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Discover = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('Arpan');
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const {getToken} = useAuth();
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const handleSearch = async(e) => {
-    if(e.key == 'Enter')
+    if(e ? e.key == 'Enter' : true)
       {
         try {
           setUsers([]);
@@ -43,6 +45,7 @@ const Discover = () => {
 
   useEffect(()=>{
     getToken().then(token => dispatch(fetchUser(token)))
+    handleSearch()
   },[])
 
   return (
@@ -71,22 +74,25 @@ const Discover = () => {
         </div>
 
         {/* list of users  */}
-        <div className='flex flex-wrap gap-6'>
-        {
-          users.map((user,index)=>(
-            <UserCard key={index} user={user} />
-          ))
-        }
-        
-        
+        <div className='w-full'>
+          <div className='flex flex-wrap gap-6  max-md:justify-center max-md:w-fit mx-auto'>
+          {
+            users.map((user,index)=>(
+              // console.log(user)
+              <UserCard key={index} user={user} onClick={()=> navigate('/profile/' + user._id)}/>
+            ))
+          }
+          
+          
 
-        {/* loader  */}
+          {/* loader  */}
 
-        {
-          loading && <Loading height='40vh'/>
+          {
+            loading && <Loading height='40vh'/>
 
-        }
+          }
 
+          </div>
         </div>
 
 

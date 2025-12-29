@@ -6,7 +6,7 @@ import api from '../api/axios.js';
 import { fetchUser } from '../features/userSlice';
 import toast from 'react-hot-toast';
 
-const UserCard = ({user}) => {
+const UserCard = ({user, onClick}) => {
 
     const currentUser =  useSelector((state) => state.user.value);
     const {getToken} = useAuth();
@@ -55,11 +55,11 @@ const UserCard = ({user}) => {
     }
 
   return (
-    <div className='bg-white p-4 pt-6 rounded-md shadow-md flex flex-col justify-between w-72'>
+    <div className='bg-white p-4 pt-6 rounded-md shadow-md flex flex-col justify-between w-72 hover:shadow-xl group cursor-pointer' onClick={onClick}>
         {/* user details  */}
         <div className='text-center'>
 
-            <img src={user.profile_picture} alt="profile pic" className='rounded-full w-16 shadow-md mx-auto ' />
+            <img src={user.profile_picture} alt="profile pic" className='rounded-full object-cover w-16 h-16 shadow-md mx-auto ' />
             <p className='mt-2 font-semibold  text-slate-700'>{user.full_name}</p>
             <p className='text-sm text-slate-500'>@{user.username}</p>
             <p className='text-sm text-slate-400 mt-2 text-center'>{user.bio}</p>

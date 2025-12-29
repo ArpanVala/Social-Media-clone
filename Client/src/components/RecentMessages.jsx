@@ -65,7 +65,7 @@ const RecentMessages = () => {
                 messages.map((msg, index)=>(
                     <Link to={`/messages/${msg.from_user_id._id}`} key={index}
                     className='flex items-center gap-2 py-3 cursor-pointer'>
-                        <img src={msg.from_user_id.profile_picture} alt="pfp" className='w-8  h-8  ring-2 ring-amber-700 ms-1 rounded-full' />
+                        <img src={msg.from_user_id.profile_picture} alt="pfp" className='w-10 h-10 flex-shrink-0 rounded-full object-cover shadow' />
 
                         <div className='w-full '>
                             <div className='flex justify-between'>

@@ -123,7 +123,7 @@ const Connections = () => {
           {
             dataArray.find((item)=> item.label === currentTab)?.value.map((user) => (
               <div className='bg-white shadow-md rounded-md max-w-88 flex gap-5 w-full p-5' key={user._id}>
-                <img src={user.profile_picture} alt="profile picture" className='w-12 h-12 rounded-full shadow-md ' />
+                <img src={user.profile_picture} alt="profile picture" className='w-12 h-12 rounded-full object-cover shadow-md ' />
                 <div className='flex-1 text-sm'>
                   <p className='font-semibold text-slate-700'>{user.full_name}</p>
                   <p className='font-light text-slate-500'>@{user.username}</p>
