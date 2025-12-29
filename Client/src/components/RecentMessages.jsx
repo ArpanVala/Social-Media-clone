@@ -65,7 +65,11 @@ const RecentMessages = () => {
                 messages.map((msg, index)=>(
                     <Link to={`/messages/${msg.from_user_id._id}`} key={index}
                     className='flex items-center gap-2 py-3 cursor-pointer'>
-                        <img src={msg.from_user_id.profile_picture} alt="pfp" className='w-10 h-10 flex-shrink-0 rounded-full object-cover shadow' />
+                        <div className='img-sec flex-shrink-0 relative'>
+                            <img src={msg.from_user_id.profile_picture} alt="pfp" className='w-10 h-10 rounded-full object-cover shadow' />
+                            <div className="dot absolute top-[-.25rem] right-0 w-3 h-3 bg-indigo-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        
 
                         <div className='w-full '>
                             <div className='flex justify-between'>
@@ -78,7 +82,8 @@ const RecentMessages = () => {
                             </div>
                             <div className='flex justify-between'>
                                 <p className='text-gray-500'>
-                                    {msg.text? msg.text : 'Media'}
+                                    {msg.isOutgoing && 'You: '}
+                                    {msg.text ? msg.text : 'Photo 📷'}
                                 </p>
                                 {!msg.seen && <p className='bg-indigo-500 text-xs text-white w-4 h-4  flex items-center justify-center rounded-full'>1</p>}
 

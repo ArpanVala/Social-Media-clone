@@ -116,12 +116,44 @@ export const getChatMessages = async (req, res) => {
 export const getUserRecentMessages = async (req, res) => {
     try {
         const {userId} = req.auth();
-        const messages = await Message.find({from_user_id: userId}).populate('from_user_id to_user_id').sort({createdAt: -1});
+        
+        // Get all messages where user is either sender or receiver
+        const messages = await Message.find({
+            $or: [
+                {from_user_id: userId},
+                {to_user_id: userId}
+            ]
+        }).populate('from_user_id to_user_id').sort({createdAt: -1});
 
-        res.json({success:true, messages});
+        // Group messages by conversation partner
+        const conversationMap = {};
+        
+        messages.forEach(msg => {
+            // Determine who the conversation partner is
+            const partnerId = msg.from_user_id._id.toString() === userId 
+                ? msg.to_user_id._id.toString() 
+                : msg.from_user_id._id.toString();
+            
+            // Keep only the most recent message per conversation
+            if (!conversationMap[partnerId]) {
+                // Normalize the message so from_user_id always points to the conversation partner
+                conversationMap[partnerId] = {
+                    ...msg.toObject(),
+                    from_user_id: msg.from_user_id._id.toString() === userId ? msg.to_user_id : msg.from_user_id,
+                    isOutgoing: msg.from_user_id._id.toString() === userId
+                };
+            }
+        });
+
+        // Convert to array and sort by date
+        const recentMessages = Object.values(conversationMap).sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        res.json({success: true, messages: recentMessages});
         
     } catch (error) {
         console.error(error);
-        return res.json({success:false, message:error.message});
+        return res.json({success: false, message: error.message});
     }
 }
