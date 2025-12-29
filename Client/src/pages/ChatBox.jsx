@@ -81,7 +81,9 @@ const ChatBox = () => {
    },[connections, userId])
 
     useEffect(() => {
-    messagesRef.current?.scrollIntoView({behavior: "smooth"})
+      setTimeout(() => {
+        messagesRef.current?.scrollIntoView({behavior: "smooth"})
+      }, 500);
   },[messages])
 
 
@@ -110,11 +112,10 @@ const ChatBox = () => {
                 </div>
               ))
             }
-
-            <div ref={messagesRef}/>
+             <div ref={messagesRef}/>
           </div>
         </div>
-
+          
         <div className='px-4'>
             <div className='flex items-center gap-3 pl-5 p-1.5 bg-white w-full max-w-xl mx-auto  border border-gray-200 shadow rounded-full mb-5'>
 
