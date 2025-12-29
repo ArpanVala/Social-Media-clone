@@ -22,6 +22,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
 
   // for switching between tabs 
   const [currentTab, setCurrentTab] = useState("posts");
@@ -68,6 +69,25 @@ const Profile = () => {
     }
   }, [getToken])
 
+  const fetchLikedPosts = useCallback(async () => {
+    const token = await getToken();
+    try {
+      const { data } = await api.get('/api/post/liked', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (data.success) {
+        setLikedPosts(data.posts);
+      }
+      else {
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+
+    }
+  }, [getToken])
+
   useEffect(() => {
     if (profileId) {
       fetchUser(profileId);
@@ -83,7 +103,11 @@ const Profile = () => {
     if (currentTab === 'saved' && !profileId) {
       fetchSavedPosts();
     }
-  }, [currentTab, profileId, fetchSavedPosts])
+    // Fetch liked posts when liked tab is selected and viewing own profile
+    if (currentTab === 'liked' && !profileId) {
+      fetchLikedPosts();
+    }
+  }, [currentTab, profileId, fetchSavedPosts, fetchLikedPosts])
 
 
   return user ? (
@@ -106,9 +130,9 @@ const Profile = () => {
             {
               (() => {
                 const tabs = ["posts", "media"];
-                // Only show saved tab on own profile
+                // Only show saved and liked tabs on own profile
                 if (!profileId) {
-                  tabs.push("saved");
+                  tabs.push("saved", "liked");
                 }
                 return tabs.map((tab, index) => (
                   <button key={index} onClick={() => setCurrentTab(tab)}
@@ -164,6 +188,23 @@ const Profile = () => {
                 <div className="text-center py-12 text-gray-500">
                   <p className="text-lg font-medium">No saved posts yet</p>
                   <p className="text-sm mt-2">Posts you save will appear here</p>
+                </div>
+              )}
+            </div>
+          )
+        }
+
+        {/* Liked Posts  */}
+        {
+          currentTab === 'liked' && !profileId &&
+          (
+            <div className="mt-6 flex flex-col items-center gap-6">
+              {likedPosts.length > 0 ? (
+                likedPosts.map((post) => (<PostCard key={post._id} post={post} />))
+              ) : (
+                <div className="text-center py-12 text-gray-500">
+                  <p className="text-lg font-medium">No liked posts yet</p>
+                  <p className="text-sm mt-2">Posts you like will appear here</p>
                 </div>
               )}
             </div>
