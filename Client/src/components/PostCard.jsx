@@ -73,7 +73,7 @@ const PostCard = ({ post }) => {
     }
 
     return (
-        <div className='shadow bg-white p-4 rounded-lg space-y-3  w-full max-w-2xl'>
+        <div className='shadow bg-white p-4 rounded-lg space-y-3  w-full max-w-2xl' onDoubleClick={handleLike}>
 
             {/* user info  */}
             <div className='inline-flex items-center gap-3 cursor-pointer'

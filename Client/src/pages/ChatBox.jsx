@@ -119,7 +119,7 @@ const ChatBox = () => {
           {
             messages.toSorted((a, b) => new Date(a.createdAt) - new Date(b.createdAt)).map((message, index) => (
               <div key={index} className={`flex flex-col ${message.to_user_id !== user._id ? 'items-start' : 'items-end'}`}>
-                <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-xl shadow ${message.to_user_id !== user._id ? 'rounded-bl-none' : 'rounded-br-none'}`}>
+                <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-xl break-words shadow ${message.to_user_id !== user._id ? 'rounded-bl-none' : 'rounded-br-none'}`}>
                   {
                     message.message_type === 'image' &&
                     <img src={message.media_url} alt="Message media" className='max-w-sm w-full mb-1 rounded-xl' />
