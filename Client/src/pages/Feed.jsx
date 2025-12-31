@@ -47,11 +47,11 @@ const Feed = () => {
 
       <div className=' h-full overflow-y-scroll no-scrollbar py-10 xl:pr-5 flex items-start md:justify-center xl:gap-8 '>
 
+  
         {/* stories and posts */}
-        <div className=''>
-          <StoryCards />
-
-          <div className='p-4 mt-4 space-y-4 '>
+        <div className='w-full max-w-2xl mx-auto px-4 sm:px-0'>
+          <StoryCards/>
+          <div className='p-1 sm:p-3 mt-4 space-y-4 '>
             {feeds.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}

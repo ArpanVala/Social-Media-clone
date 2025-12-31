@@ -11,12 +11,12 @@ const Layout = () => {
     <>
     {
       user ? 
-       <div className='w-full h-screen flex'>
+       <div className='w-full h-screen flex overflow-hidden'>
 
     
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      <div className="flex-1 bg-gray-100">
+      <div className="flex-1 bg-gray-100 overflow-hidden">
         <Outlet />
       </div>
 
