@@ -94,7 +94,13 @@ const PostCard = ({ post }) => {
 
             {/* content  */}
             {
-                post.content && <div className='text-gray-800 text-sm whitespace-pre-line break-words overflow-hidden' dangerouslySetInnerHTML={{ __html: postWithHashtags }} />
+                post.content && (
+                    <div
+                        className='text-gray-800 text-sm whitespace-pre-line break-all overflow-hidden'
+                        style={{ overflowWrap: 'anywhere' }}
+                        dangerouslySetInnerHTML={{ __html: postWithHashtags }}
+                    />
+                )
             }
 
             {/* Images  */}

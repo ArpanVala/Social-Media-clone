@@ -38,7 +38,14 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
     const renderContent = () => {
        switch (viewStory.media_type) {
         case 'text':
-            return (<div className='p-8 text-white text-xl md:text-2xl text-center w-full h-full flex items-center justify-center'>{viewStory.content}</div>);
+            return (
+                <div
+                    className='p-8 text-white text-xl md:text-2xl text-center w-full h-full flex items-center justify-center whitespace-pre-wrap break-all'
+                    style={{ overflowWrap: 'anywhere' }}
+                >
+                    {viewStory.content}
+                </div>
+            );
 
         case 'image':
             return (
