@@ -14,7 +14,6 @@ const RecentMessages = () => {
     const intervalRef = useRef(null);
 
     const getRecentMessages = useCallback(async () => {
-        console.log('inside get recent messages')
         try {
             const token = await getToken();
             const { data } = await api.get('/api/user/recent-messages', {
