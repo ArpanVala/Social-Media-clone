@@ -21,6 +21,10 @@ const CreatePost = () => {
     {
       return toast.error("Post can not be empty!");
     }
+    if(images.length > 4)
+    {
+      return toast.error("You can upload maximum 4 images!");
+    }
     setLoading(true);
     const postType = images.length && content ? "text_with_image" : images.length ? "image" : "text";
 
@@ -101,7 +105,7 @@ const CreatePost = () => {
           {/* bottom bar  */}
           <div className='flex items-center justify-between pt-3 border-t border-gray-300'>
             <label htmlFor='images' className='cursor-pointer flex items-center gap-2  text-sm text-gray-500 hover:text-gray-700 transition'>
-              <Image className='size-6'/><span className='text-xs text-red-700'>*add upto 4 images</span>
+              <Image className='size-6'/><span className='text-xs text-gray-400 font-semib  old'>*Max 4 photos can be added</span>
             </label>
 
             <input type="file" id="images" accept="images/*" hidden multiple onChange={(e) => setImages([...images, ...e.target.files])} />
