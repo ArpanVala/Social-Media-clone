@@ -44,7 +44,7 @@ const ProfileModal = ({ setShowEdit }) => {
     }
 
   return (
-    <div className='fixed inset-0 h-auto overflow-y-scroll bg-bold/50 z-110'>
+    <div className='fixed inset-0 h-auto overflow-y-scroll bg-black/50 z-110 text-mute-3'>
         <div className='max-w-2xl mx-auto sm:p-6'>
             <div className='bg-plain rounded-lg p-6 shadow'>
                 <h1 className='text-2xl font-bold text-title mb-6'>Edit Profile</h1>

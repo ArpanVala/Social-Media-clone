@@ -3,7 +3,7 @@ import { assets } from "../assets/assets"
 import MenuItems from "./MenuItems"
 import { CirclePlus, LogOut, SunIcon, MoonIcon } from "lucide-react"
 import {UserButton, useClerk} from '@clerk/clerk-react'
-import { useSelector } from "react-redux"
+import { useSelector, } from "react-redux"
 import { useEffect, useState } from "react"
 
 
@@ -32,9 +32,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     `}>
      <div className="w-full">
         <header >
-          <Link to="/" className="py-3 px-4 w-fit flex items-center gap-3 cursor-pointer">
-                <img src={assets.logo} alt="atom logo" width={24} height={24} />
-                <h1 className="text-xl font-semibold">Atom.</h1>
+          <Link to="/" className="py-3 px-4 w-fit flex items-center gap-3  cursor-pointer">
+                <img src={isDark? assets.logo_dark :assets.logo} alt="atom logo" width={24} height={24} />
+                <h1 className="text-xl font-semibold text-bold">Atom.</h1>
             </Link>
             <hr className="border-mute" />
         </header> 
@@ -42,17 +42,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <MenuItems />
         
         <div>
-            <Link to="/create-post" className="flex items-center justify-center gap-2 my-2 mx-4 p-2 rounded-lg bg-gradient-to-r from-accent to-gradient-end hover:from-gradient-start-hover hover:to-gradient-end-hover hover:shadow-lg text-plain hover:scale-98 cursor-pointer transition">
+            <Link to="/create-post" className="flex items-center justify-center gap-2 my-2 mx-4 p-2 rounded-lg bg-gradient-to-r from-accent to-gradient-end hover:from-gradient-start-hover hover:to-gradient-end-hover hover:shadow-lg text-sidebar-bg hover:scale-98 cursor-pointer transition">
                 <CirclePlus className="w=5 h-5"/> Create Post 
             </Link>
         </div>
      </div>
 
      <div className="w-full border-t border-mute p-4 px-7 flex items-center justify-between">
-          <div className="flex gap-2 items-center cursor-pointer">
+     
+          <div className="flex gap-2 items-center">
             <UserButton/>
             <div>
-              <h1 className="text-sm">{user.full_name}</h1>
+              <h1 className="text-sm text-mute-3">{user.full_name}</h1>
               <p className="text-xs text-mute-2 ">@{user.username}</p>
             </div>
           </div>
@@ -75,11 +76,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           }
             
           </button>
-
-          
-      
-
-
      </div>
 
 

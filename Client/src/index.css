@@ -8,6 +8,20 @@
   display: none;
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--mute);
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+} 
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-end);
+}
+
 @theme {
   --color-background: var(--background);
   --color-plain: var(--plain);

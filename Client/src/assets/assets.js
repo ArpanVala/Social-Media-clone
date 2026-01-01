@@ -1,4 +1,6 @@
 import logo from './logo.png'
+import logo_dark from './logo-dark.png'
+import user from './user.jpg'
 import sample_cover from './sample_cover.jpg'
 import sample_profile from './sample_profile.jpg'
 import bgImage from './bgImage.png'
@@ -8,6 +10,8 @@ import sponsored_img from './sponsored_img.png'
 
 export const assets = {
     logo,
+    logo_dark,
+    user,
     sample_cover,
     sample_profile,
     bgImage,

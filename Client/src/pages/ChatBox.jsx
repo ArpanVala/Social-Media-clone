@@ -105,16 +105,16 @@ const ChatBox = () => {
 
 
   return user && (
-    <div className='flex flex-col h-screen'>
+    <div className='flex flex-col h-screen '>
       <div className='flex items-center gap-2 p-4 md:px-10  xl:pl-42 bg-mute/10  border-b border-mute'>
         <img src={user.profile_picture} alt="" className='size-8 rounded-full ' />
         <div>
-          <p className='font-medium'>{user.full_name}</p>
+          <p className='font-medium text-mute-3'>{user.full_name}</p>
           <p className='text-sm text-mute-2 -mt-1.5'>@{user.username}</p>
         </div>
       </div>
 
-      <div ref={messagesContainerRef} onScroll={handleScroll} className='p-5 md:px-10 h-full overflow-y-scroll relative'>
+      <div ref={messagesContainerRef} onScroll={handleScroll} className='p-5 md:px-10 h-full overflow-y-scroll relative scrollbar'>
         <div className='space-y-2 max-w-4xl mx-auto '>
           {
             messages.toSorted((a, b) => new Date(a.createdAt) - new Date(b.createdAt)).map((message, index) => (
@@ -136,7 +136,7 @@ const ChatBox = () => {
         {showScrollButton && (
           <button
             onClick={scrollToBottom}
-            className='fixed bottom-20 right-8 bg-plain hover:bg-background mute-3 p-2 md:p-3 rounded-full shadow-lg border border-mute transition-all duration-200 z-10'
+            className='fixed bottom-20 right-8 bg-plain text-bold hover:bg-background mute-3 p-2 md:p-3 rounded-full shadow-lg border border-mute transition-all duration-200 z-10'
           >
             <ArrowDown size={15} />
           </button>

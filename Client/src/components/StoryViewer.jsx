@@ -40,7 +40,7 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
         case 'text':
             return (
                 <div
-                    className='p-8 text-plain text-xl md:text-2xl text-center w-full h-full flex items-center justify-center plainspace-pre-wrap break-all'
+                    className='p-8 text-white text-xl md:text-2xl text-center w-full h-full flex items-center justify-center plainspace-pre-wrap break-all'
                     style={{ overflowWrap: 'anywhere' }}
                 >
                     {viewStory.content}
@@ -62,13 +62,13 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
     }
 
   return (
-    <div className='fixed inset-0 bg-bold/70 h-screen z-110 flex items-center justify-center' 
+    <div className='fixed inset-0 bg-black/90 h-screen z-110 flex items-center justify-center' 
     style={{ backgroundColor: viewStory.media_type === 'text' ? viewStory.background_color : 'bold' }}
     >
 
     {/* progress bar  */}
     <div className=' absolute top-0 left-0 w-full h-1 bg-mute-2 '>
-        <div className='h-full bg-plain  transition-all linear duration-100' style={{width: `${progress}%`}}>
+        <div className='h-full bg-white  transition-all linear duration-100' style={{width: `${progress}%`}}>
 
         </div>
     </div>    
@@ -83,7 +83,7 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
 
     {/* close btn  */}
     <button onClick={()=> handleClose()}
-    className='absolute top-4 right-4 text-plain text-3xl font-bold focus:outline-none'>
+    className='absolute top-4 right-4 text-white text-3xl font-bold focus:outline-none'>
         <X className='w-8 h-8 hover:scale-110 transition cursor-pointer'/>
     </button>
 

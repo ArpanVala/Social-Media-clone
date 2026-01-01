@@ -90,8 +90,8 @@ const Connections = () => {
            {
             dataArray.map((item, index) => (
               <div className='flex flex-col items-center justify-center gap-1  border-2  border-mute h-20 w-40 bg-plain shadow rounded' key={index}>
-                <p>{item.value.length}</p>
-                <p className='text-subtitle'>{item.label}</p>
+                <p className='text-mute-3'>{item.value.length}</p>
+                <p className='text-mute-2'>{item.label}</p>
               </div>
             ))
            }
@@ -104,7 +104,7 @@ const Connections = () => {
             dataArray.map((tab, idx) => (
               <button
                 key={tab.label}
-                className={`cursor-pointer flex items-center px-3 py-1 text-sm rounded  transition-colors ${currentTab === tab.label ? 'bg-plain font-medium text-bold border-2 border-mute-4' : 'text-mute-2  hover:text-bold hover:bg-muted'}`}
+                className={`cursor-pointer flex items-center px-3 py-1 text-sm rounded  transition-colors ${currentTab === tab.label ? 'bg-plain font-medium text-mute-3 border-2 border-mute-4' : 'text-mute-2  hover:text-bold hover:bg-muted'}`}
                 onClick={() => setCurrentTab(tab.label)}
               >
                 <tab.icon size={14}/>
@@ -139,21 +139,21 @@ const Connections = () => {
                 }
                 {
                   currentTab === 'Following' && (
-                    <button onClick={()=> handleUnfollow(user._id)} className='w-full p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer'>Unfollow
+                    <button onClick={()=> handleUnfollow(user._id)} className='w-full p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer text-mute-3'>Unfollow
                     </button>
                   )
                 }
 
                  {
                   currentTab === 'Pending' && (
-                    <button onClick={()=> acceptConnection(user._id)}  className='w-full p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer'>Accept
+                    <button onClick={()=> acceptConnection(user._id)}  className='w-full p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer text-mute-3'>Accept
                     </button>
                   )
                 }
 
                  {
                   currentTab === 'Connections' && (
-                    <button className='w-full flex  items-center gap-2  justify-center p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer'
+                    <button className='w-full flex  items-center gap-2  justify-center p-2 text-sm bg-sidebar-bg rounded-md hover:bg-mute-2/10 transition active:scale-95 cursor-pointer text-mute-3'
                     onClick={()=> navigate(`/messages/${user._id}`)}>
                     <MessageCircle size={14}/>
                     Message

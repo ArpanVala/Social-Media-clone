@@ -84,10 +84,10 @@ const Discover = () => {
         <div className='mb-8 shadow-md border border-mute-2/10 bg-plain'>
           <div className='p-6'>
             <div className='relative '>
-              <Search className='w-5 h-5 absolute top-1/2 left-3 -translate-y-1/2' />
+              <Search className='w-5 h-5 absolute text-mute-3 top-1/2 left-3 -translate-y-1/2' />
               <input type="text" placeholder='Search people or posts...' value={input} onChange={(e) => setInput(e.target.value)}
                 onKeyUp={handleSearch}
-                className='pl-10 sm:pl-12 py-2 w-full border border-mute-4 rounded-md outline-none'
+                className='pl-10 sm:pl-12 py-2 w-full border border-mute-4 rounded-md outline-none placeholder:text-mute-2  text-text-secondary'
                 autoFocus
               />
             </div>
@@ -99,7 +99,7 @@ const Discover = () => {
               <button
                 onClick={() => setActiveTab('profiles')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'profiles'
-                  ? 'bg-accent text-plain'
+                  ? 'bg-accent text-white'
                   : 'text-text-secondary hover:bg-background'
                   }`}
               >
@@ -108,7 +108,7 @@ const Discover = () => {
               <button
                 onClick={() => setActiveTab('posts')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'posts'
-                  ? 'bg-accent text-plain'
+                  ? 'bg-accent text-white'
                   : 'text-text-secondary hover:bg-background'
                   }`}
               >

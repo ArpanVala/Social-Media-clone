@@ -84,6 +84,7 @@ const UserCard = ({user, onClick}) => {
         </div>
 
         {/* follow button  */}
+        {currentUser?._id !== user._id && (
         <div className='flex  mt-4 gap-2'>
 
             <button onClick={handleFollow}
@@ -103,6 +104,7 @@ const UserCard = ({user, onClick}) => {
             </button>
 
         </div>
+        )}
     </div>
   )
 }

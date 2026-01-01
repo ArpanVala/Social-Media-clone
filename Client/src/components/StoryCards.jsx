@@ -50,9 +50,9 @@ const StoryCards = () => {
                     <div className="flex gap-4 px-4 py-2 w-max">
                         
                         {/* add story card */}
-                        <div onClick={() => setShowModal(true)} className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-indigo-50 to-plain">
+                        <div onClick={() => setShowModal(true)} className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-accent/1 to-accent/20">
                             <div className="h-full flex flex-col gap-4 justify-center items-center p-4">
-                                <div className="bg-indigo-100 p-2 rounded-full">
+                                <div className="bg-indigo-200 p-2 rounded-full">
                                     <Plus className="text-accent" />
                                 </div>
                                 <span className="text-sm font-medium text-accent">Add Story</span>
@@ -68,7 +68,7 @@ const StoryCards = () => {
                                 <img src={story.user.profile_picture} 
                                     className="absolute top-3 left-3 size-8 z-10 rounded-full ring ring-gray-100 shadow" />
 
-                                <p className="absolute top-18 left-3 text-plain/60 text-sm truncate max-w-24 z-10">
+                                <p className="absolute top-18 left-3 text-plain/90 text-sm truncate max-w-24 z-10">
                                     {story.content}
                                 </p>
 

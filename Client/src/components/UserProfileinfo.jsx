@@ -1,5 +1,6 @@
 import { Calendar, Edit, MapPin, PenBox, PenIcon, Verified } from 'lucide-react'
 import moment from 'moment'
+import { assets } from '../assets/assets'
 
 const UserProfileinfo = ({ posts, user, profileId, setShowEdit }) => {
   return (
@@ -8,7 +9,7 @@ const UserProfileinfo = ({ posts, user, profileId, setShowEdit }) => {
 
         {/* profile_picture */}
         <div className="w-24 h-24 rounded-full  border-[7px] border-plain overflow-hidden absolute -top-14">
-          {user.profile_picture && <img src={user.profile_picture} alt="Profile" className=" w-full h-full rounded-full object-cover" />}
+          {user.profile_picture ? <img src={user.profile_picture} alt="Profile" className=" w-full h-full rounded-full object-cover" />: <img src={assets.user} alt="Profile" className=" w-full h-full rounded-full object-cover" /> }
         </div>  
 
         {/* profile content  */}
@@ -24,7 +25,7 @@ const UserProfileinfo = ({ posts, user, profileId, setShowEdit }) => {
 
             {/* Display Edit button only if the profileId matches the logged in user id */}
             {
-              !profileId &&  <button onClick={() => setShowEdit(true)} className='flex items-center gap-2 border border-mute-4 hover:bg-background px-4 py-2 rounded-lg font-medium transition-colors mt-4 md:mt-0 mute-3'><PenBox size={16}/>Edit</button>
+              !profileId &&  <button onClick={() => setShowEdit(true)} className='flex items-center gap-2 border border-mute-4 text-mute-3 hover:bg-background px-4 py-2 rounded-lg font-medium transition-colors mt-4 md:mt-0 mute-3'><PenBox size={16}/>Edit</button>
             } 
           </div>
 

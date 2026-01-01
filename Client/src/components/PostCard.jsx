@@ -81,7 +81,7 @@ const PostCard = ({ post }) => {
             >
                 <img src={post.user.profile_picture} alt="user" className='w-10 h-10 rounded-full object-cover shadow' />
                 <div>
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-1 text-mute-3'>
                         <span>{post.user.full_name}</span>
                         <BadgeCheck className='w-4 h-4 text-accent' />
                     </div>

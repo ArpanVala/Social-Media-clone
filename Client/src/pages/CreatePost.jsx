@@ -63,7 +63,7 @@ const CreatePost = () => {
   return (
 
     <div className="min-h-screen bg-background">
-      <div className='max-w-6xl mx-auto p-6'>
+      <div className='max-w-6xl mx-auto p-6 text-mute-3'>
          {/* title  */}
         <div className='mb-8'>
           <h1 className='text-2xl font-semibold text-title '>Create Post </h1>
@@ -112,7 +112,7 @@ const CreatePost = () => {
 
             <button disabled={loading} onClick={()=> toast.promise(handlePost(),{
               loading:"Publishing..."
-            })} className='px-4 py-1 rounded-md bg-accent text-plain hover:scale-95 hover:shadow-lg transition duration-200 cursor-pointer'>Publish Post</button>
+            })} className='px-4 py-1 rounded-md bg-accent text-white hover:scale-95 hover:shadow-lg transition duration-200 cursor-pointer'>Publish Post</button>
 
           </div>
 
