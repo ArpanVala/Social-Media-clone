@@ -76,18 +76,18 @@ const Discover = () => {
       <div className='max-w-6xl mx-auto p-6 h-full'>
         {/* title  */}
         <div className='mb-8'>
-          <h1 className='text-2xl font-semibold text-slate-800 '>Discover</h1>
-          <h6 className='text-lg text-slate-600'>Connect with amazing people and grow your network</h6>
+          <h1 className='text-2xl font-semibold text-title '>Discover</h1>
+          <h6 className='text-lg text-subtitle'>Connect with amazing people and grow your network</h6>
         </div>
 
         {/* input search */}
-        <div className='mb-8 shadow-md border border-slate-200 bg-white'>
+        <div className='mb-8 shadow-md border border-mute-2/10 bg-plain'>
           <div className='p-6'>
             <div className='relative '>
               <Search className='w-5 h-5 absolute top-1/2 left-3 -translate-y-1/2' />
               <input type="text" placeholder='Search people or posts...' value={input} onChange={(e) => setInput(e.target.value)}
                 onKeyUp={handleSearch}
-                className='pl-10 sm:pl-12 py-2 w-full border border-gray-300 rounded-md outline-none'
+                className='pl-10 sm:pl-12 py-2 w-full border border-mute-4 rounded-md outline-none'
                 autoFocus
               />
             </div>
@@ -95,12 +95,12 @@ const Discover = () => {
 
           {/* Tabs */}
           <div className='px-6 pb-4'>
-            <div className='flex gap-2 border-t border-gray-200 pt-4'>
+            <div className='flex gap-2 border-t border-mute pt-4'>
               <button
                 onClick={() => setActiveTab('profiles')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'profiles'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-accent text-plain'
+                  : 'text-text-secondary hover:bg-background'
                   }`}
               >
                 Profiles {users.length > 0 && `(${users.length})`}
@@ -108,8 +108,8 @@ const Discover = () => {
               <button
                 onClick={() => setActiveTab('posts')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'posts'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-accent text-plain'
+                  : 'text-text-secondary hover:bg-background'
                   }`}
               >
                 Posts {posts.length > 0 && `(${posts.length})`}

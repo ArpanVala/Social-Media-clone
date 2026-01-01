@@ -100,11 +100,11 @@ const StoryModal = ({setShowModal, fetchStories}) => {
   }
 
   return (
-    <div className="fixed inset-0 z-110 min-h-screen bg-black/50 backdrop-blur text-white flex justify-center items-center p-4">
+    <div className="fixed inset-0 z-110 min-h-screen bg-bold/50 backdrop-blur text-plain flex justify-center items-center p-4">
       <div className="w-full max-w-md ">
         <div className="text-center mb-4 flex items-center justify-between">
             <button onClick={()=> setShowModal(false)}
-            className="p-2 cursor-pointer hover:bg-gray-100/30 rounded-full"
+            className="p-2 cursor-pointer hover:bg-background/30 rounded-full"
             ><ArrowLeft/></button>
 
             <h1 className="text-lg font-semibold">Create Story</h1>
@@ -116,7 +116,7 @@ const StoryModal = ({setShowModal, fetchStories}) => {
         {
           // Text mode
           mode === "text" && (
-            <textarea className="w-full h-full p-6 text-white bg-transparent text-lg resize-none focus:outline-none" onChange={(e) => setText(e.target.value)} value={text} placeholder="What's on your mind?"/>
+            <textarea className="w-full h-full p-6 text-plain bg-transparent text-lg resize-none focus:outline-none" onChange={(e) => setText(e.target.value)} value={text} placeholder="What's on your mind?"/>
           )
         }
         {
@@ -147,11 +147,11 @@ const StoryModal = ({setShowModal, fetchStories}) => {
         {/* text and media mode buttons */}
         <div className="flex gap-2 mt-3">
           <button onClick={() => {setMode("text"); setMedia(null); setPreviewUrl(null);}} 
-          className={`flex-1 flex items-center justify-center text-sm gap-2 p-2 rounded cursor-pointer ${mode === "text" ? "bg-white text-black" : "bg-zinc-800"}`}>
+          className={`flex-1 flex items-center justify-center text-sm gap-2 p-2 rounded cursor-pointer ${mode === "text" ? "bg-plain text-bold" : "bg-mute-3"}`}>
             <Text size={18}/>Text
           </button>
 
-          <label className={`flex-1 flex items-center justify-center text-sm gap-2 p-2 rounded cursor-pointer ${mode === "media" ? "bg-white text-black" : "bg-zinc-800"}`}>
+          <label className={`flex-1 flex items-center justify-center text-sm gap-2 p-2 rounded cursor-pointer ${mode === "media" ? "bg-plain text-bold" : "bg-mute-3"}`}>
             <input type="file" accept="image/*, video/*" className="hidden" onChange={handleMediaUpload}/>
             <Upload size={18}/>Image/Video
           </label>
@@ -163,7 +163,7 @@ const StoryModal = ({setShowModal, fetchStories}) => {
           onClick={()=> toast.promise(handleCreateStory(), {
             loading: 'Saving...',
           })}
-           className="flex items-center justify-center gap-2 p-2 rounded-lg cursor-pointer w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 active:scale-95 transition">
+           className="flex items-center justify-center gap-2 p-2 rounded-lg cursor-pointer w-full bg-gradient-to-r from-gradient-end to-pink-500 hover:from-gradient-end-hover hover:to-pink-600 active:scale-95 transition">
             <Sparkle size={18}/> Create Story
           </button>
         </div>

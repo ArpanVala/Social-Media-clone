@@ -50,12 +50,12 @@ const StoryCards = () => {
                     <div className="flex gap-4 px-4 py-2 w-max">
                         
                         {/* add story card */}
-                        <div onClick={() => setShowModal(true)} className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-indigo-50 to-white">
+                        <div onClick={() => setShowModal(true)} className="rounded-lg shadow-sm min-w-30 max-w-30 max-h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-dashed border-indigo-300 bg-gradient-to-b from-indigo-50 to-plain">
                             <div className="h-full flex flex-col gap-4 justify-center items-center p-4">
                                 <div className="bg-indigo-100 p-2 rounded-full">
-                                    <Plus className="text-indigo-500" />
+                                    <Plus className="text-accent" />
                                 </div>
-                                <span className="text-sm font-medium text-indigo-500">Add Story</span>
+                                <span className="text-sm font-medium text-accent">Add Story</span>
                             </div>
                         </div>
 
@@ -63,21 +63,21 @@ const StoryCards = () => {
                         {stories.map((story, index) => (
                             <div key={index}
                                 onClick={() => setViewStory(story)}
-                                className={`relative rounded-lg shadow min-w-30 max-w-30 max-h-40 cursor-pointer hover:shadow-lg transition-all duration-200 bg-gradient-to-b from-indigo-500 to-purple-600 hover:from-indigo-700 hover:to-purple-800 active:scale-95`}
+                                className={`relative rounded-lg shadow min-w-30 max-w-30 max-h-40 cursor-pointer hover:shadow-lg transition-all duration-200 bg-gradient-to-b from-accent to-gradient-end-hover hover:from-accent hover:to-gradient-end-hover active:scale-95`}
                             >
                                 <img src={story.user.profile_picture} 
                                     className="absolute top-3 left-3 size-8 z-10 rounded-full ring ring-gray-100 shadow" />
 
-                                <p className="absolute top-18 left-3 text-white/60 text-sm truncate max-w-24 z-10">
+                                <p className="absolute top-18 left-3 text-plain/60 text-sm truncate max-w-24 z-10">
                                     {story.content}
                                 </p>
 
-                                <p className="absolute bottom-2 right-2 text-white/85 text-xs z-10">
+                                <p className="absolute bottom-2 right-2 text-plain/85 text-xs z-10">
                                     {moment(story.createdAt).fromNow()}
                                 </p>
                                 
                                 {story.media_type !== 'text' && (
-                                    <div className="absolute inset-0 z-1 rounded-lg bg-black overflow-hidden">
+                                    <div className="absolute inset-0 z-1 rounded-lg bg-bold overflow-hidden">
                                         {story.media_type === "image" ? 
                                             <img src={story.media_url}
                                                 className="w-full h-full object-cover hover:scale-110 transition duration-500 opacity-70 hover:opacity-100"/>

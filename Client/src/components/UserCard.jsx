@@ -55,20 +55,20 @@ const UserCard = ({user, onClick}) => {
     }
 
   return (
-    <div className='bg-white p-4 pt-6 rounded-md shadow-md flex flex-col justify-between w-72 hover:shadow-xl group cursor-pointer' onClick={onClick}>
+    <div className='bg-plain p-4 pt-6 rounded-md shadow-md flex flex-col justify-between w-72 hover:shadow-xl group cursor-pointer' onClick={onClick}>
         {/* user details  */}
         <div className='text-center'>
 
             <img src={user.profile_picture} alt="profile pic" className='rounded-full object-cover w-16 h-16 shadow-md mx-auto ' />
-            <p className='mt-2 font-semibold  text-slate-700'>{user.full_name}</p>
-            <p className='text-sm text-slate-500'>@{user.username}</p>
-            <p className='text-sm text-slate-400 mt-2 text-center'>{user.bio}</p>
+            <p className='mt-2 font-semibold  text-subtitle'>{user.full_name}</p>
+            <p className='text-sm text-subtitle'>@{user.username}</p>
+            <p className='text-sm text-mute-2/70 mt-2 text-center'>{user.bio}</p>
         </div>
 
         <div className='flex mt-4 gap-2 justify-between '>
         {
             user.location && 
-            <div className='flex items-center gap-1 text-slate-400'> 
+            <div className='flex items-center gap-1 text-mute-2/70'> 
                 <MapPin size={14}/>
                 <span className='text-sm'> {user.location}</span>
             </div>
@@ -76,7 +76,7 @@ const UserCard = ({user, onClick}) => {
         }
         {
             user.followers && 
-            <div className='flex items-center gap-1 text-slate-400'> 
+            <div className='flex items-center gap-1 text-mute-2/70'> 
                 <span className='text-sm'> {user.followers.length} followers</span>
             </div>
 
@@ -88,7 +88,7 @@ const UserCard = ({user, onClick}) => {
 
             <button onClick={handleFollow}
             disabled={currentUser.following.includes(user._id)}
-            className='w-full py-2 rounded-md  bg-slate-200 text-black flex justify-center items-center gap-2 cursor-pointer'
+            className='w-full py-2 rounded-md  bg-mute-2/10 text-bold flex justify-center items-center gap-2 cursor-pointer'
             >
                 <UserPlus size={14}/>
                 {currentUser?.following.includes(user._id) ? 'Following' : 'Follow'}
@@ -96,7 +96,7 @@ const UserCard = ({user, onClick}) => {
 
             <button 
             onClick={handleConnectionRequest}
-            className=' px-3  rounded-md  bg-indigo-500 hover:bg-indigo-600 hover:scale-95 text-white'>
+            className=' px-3  rounded-md  bg-accent hover:bg-gradient-start-hover hover:scale-95 text-plain'>
                 {currentUser?.connections.includes(user._id) ? 
                 <MessageCircle size={18}/>
                  : <Plus size={14}/>}

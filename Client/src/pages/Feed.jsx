@@ -61,15 +61,15 @@ const Feed = () => {
         {/* ad + messages  */}
         <div className='max-xl:hidden sticky top-0'>
           {/* ad  */}
-          <div className='max-w-xs bg-white text-xs p-4 group rounded-md  shadow hover:shadow-xl cursor-pointer relative'>
+          <div className='max-w-xs bg-plain text-xs p-4 group rounded-md  shadow hover:shadow-xl cursor-pointer relative'>
             <a href="https://goalsetter-arpanvala.netlify.app/" target='_blank' className='flex flex-col gap-2'>
-              <h3 className='text-slate-600 inline-flex gap-1 items-center font-semibold'>AD <Megaphone size={16} /></h3>
+              <h3 className='text-subtitle inline-flex gap-1 items-center font-semibold'>AD <Megaphone size={16} /></h3>
               <div className='overflow-hidden rounded-md'>
                 <img src={assets.sponsored_img} alt="ad image" className='w-full h-full object-cover group-hover:scale-103 transition duration-500' />
               </div>
 
-              <p className='text-slate-900 group-hover:text-indigo-700'>GoalSetter - Arpan Vala</p>
-              <p className='text-slate-600'>Achieve your goals with personalized categories and easy tracking.</p>
+              <p className='text-title group-hover:text-accent'>GoalSetter - Arpan Vala</p>
+              <p className='text-subtitle'>Achieve your goals with personalized categories and easy tracking.</p>
             </a>
           </div>
 

@@ -40,7 +40,7 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
         case 'text':
             return (
                 <div
-                    className='p-8 text-white text-xl md:text-2xl text-center w-full h-full flex items-center justify-center whitespace-pre-wrap break-all'
+                    className='p-8 text-plain text-xl md:text-2xl text-center w-full h-full flex items-center justify-center plainspace-pre-wrap break-all'
                     style={{ overflowWrap: 'anywhere' }}
                 >
                     {viewStory.content}
@@ -62,28 +62,28 @@ const StoryViewer = ({ viewStory, setViewStory }) => {
     }
 
   return (
-    <div className='fixed inset-0 bg-black/70 h-screen z-110 flex items-center justify-center' 
-    style={{ backgroundColor: viewStory.media_type === 'text' ? viewStory.background_color : 'black' }}
+    <div className='fixed inset-0 bg-bold/70 h-screen z-110 flex items-center justify-center' 
+    style={{ backgroundColor: viewStory.media_type === 'text' ? viewStory.background_color : 'bold' }}
     >
 
     {/* progress bar  */}
-    <div className=' absolute top-0 left-0 w-full h-1 bg-gray-500 '>
-        <div className='h-full bg-white  transition-all linear duration-100' style={{width: `${progress}%`}}>
+    <div className=' absolute top-0 left-0 w-full h-1 bg-mute-2 '>
+        <div className='h-full bg-plain  transition-all linear duration-100' style={{width: `${progress}%`}}>
 
         </div>
     </div>    
 
     {/* User info */}
-    <div className='absolute top-4 left-4 flex items-center gap-3 p-2 sm:px-4 sm:py-3  backdrop-blur-2xl bg-black/50 rounded'>
-        <img src={viewStory.user?.profile_picture} alt="" className='size-9 sm:size-10  rounded-full object-cover border border-white' />
-        <div className='text-white font-medium'>
+    <div className='absolute top-4 left-4 flex items-center gap-3 p-2 sm:px-4 sm:py-3  backdrop-blur-2xl bg-bold/50 rounded'>
+        <img src={viewStory.user?.profile_picture} alt="" className='size-9 sm:size-10  rounded-full object-cover border border-plain' />
+        <div className='text-plain font-medium'>
             <span>{viewStory.user?.full_name}</span>
         </div>
     </div>
 
     {/* close btn  */}
     <button onClick={()=> handleClose()}
-    className='absolute top-4 right-4 text-white text-3xl font-bold focus:outline-none'>
+    className='absolute top-4 right-4 text-plain text-3xl font-bold focus:outline-none'>
         <X className='w-8 h-8 hover:scale-110 transition cursor-pointer'/>
     </button>
 

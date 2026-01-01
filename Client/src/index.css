@@ -7,3 +7,57 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+@theme {
+  --color-background: var(--background);
+  --color-plain: var(--plain);
+  --color-text-secondary: var(--text-secondary);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-accent: var(--accent);
+  --color-gradient-end: var(--gradient-end);
+  --color-gradient-start-hover: var(--gradient-start-hover);
+  --color-gradient-end-hover: var(--gradient-end-hover);
+  --color-mute: var(--mute);
+  --color-mute-2: var(--mute-2);
+  --color-mute-3: var(--mute-3);
+  --color-mute-4: var(--mute-4);
+  --color-bold: var(--bold);
+  --color-title: var(--title);
+  --color-subtitle: var(--subtitle);
+}
+
+:root {
+  --background: #f3f4f6;
+  --accent: #615fff;
+  --gradient-end: #ad46ff;
+  --gradient-start-hover: #4f39f6;
+  --gradient-end-hover: #9810fa;
+  --plain: #ffffff;
+  --bold: #000000;
+  --title: #1d293d;
+  --subtitle: #45556c;
+  --text-secondary: #4a556f;
+  --sidebar-bg: #f9fafb;
+  --mute: #e5e7eb;
+  --mute-2: #6a7282;
+  --mute-3: #364153;
+  --mute-4: #d1d5dc;
+}
+
+.dark {
+  --background: #0f1419;
+  --accent: #7c6dff;
+  --gradient-end: #c061ff;
+  --gradient-start-hover: #6b57ff;
+  --gradient-end-hover: #b32cff;
+  --plain: #1a1f2e;
+  --bold: #ffffff;
+  --title: #e5e7eb;
+  --subtitle: #9ca3af;
+  --text-secondary: #d1d5db;
+  --sidebar-bg: #161b22;
+  --mute: #1f2937;
+  --mute-2: #9ca3af;
+  --mute-3: #d1d5db;
+  --mute-4: #374151;
+}

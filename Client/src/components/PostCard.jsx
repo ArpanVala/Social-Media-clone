@@ -8,7 +8,7 @@ import api from '../api/axios.js';
 import toast from 'react-hot-toast';
 
 const PostCard = ({ post }) => {
-    const postWithHashtags = post.content ? post.content.replace(/(#\w+)/g, '<span class=" font-medium text-indigo-500">$1</span>') : '';
+    const postWithHashtags = post.content ? post.content.replace(/(#\w+)/g, '<span class=" font-medium text-accent">$1</span>') : '';
     const [likes, setLikes] = useState(post.likes_count);
     const [isSaved, setIsSaved] = useState(false);
     const currentUser = useSelector((state) => state.user.value);
@@ -73,7 +73,7 @@ const PostCard = ({ post }) => {
     }
 
     return (
-        <div className='shadow bg-white p-4 rounded-lg space-y-3  w-full max-w-2xl' onDoubleClick={handleLike}>
+        <div className='shadow bg-plain p-4 rounded-lg space-y-3  w-full max-w-2xl' onDoubleClick={handleLike}>
 
             {/* user info  */}
             <div className='inline-flex items-center gap-3 cursor-pointer'
@@ -83,10 +83,10 @@ const PostCard = ({ post }) => {
                 <div>
                     <div className='flex items-center gap-1'>
                         <span>{post.user.full_name}</span>
-                        <BadgeCheck className='w-4 h-4 text-blue-500' />
+                        <BadgeCheck className='w-4 h-4 text-accent' />
                     </div>
 
-                    <div className='text-gray-500 text-sm'>
+                    <div className='text-mute-2 text-sm'>
                         {moment(post.createdAt).fromNow()}
                     </div>
                 </div>
@@ -96,7 +96,7 @@ const PostCard = ({ post }) => {
             {
                 post.content && (
                     <div
-                        className='text-gray-800 text-sm whitespace-pre-line break-all overflow-hidden'
+                        className='text-title text-sm plainspace-pre-line break-all overflow-hidden'
                         style={{ overflowWrap: 'anywhere' }}
                         dangerouslySetInnerHTML={{ __html: postWithHashtags }}
                     />
@@ -112,13 +112,13 @@ const PostCard = ({ post }) => {
             </div>
 
             {/* action buttons */}
-            <div className='flex items-center gap-4 text-gray-600 text-sm pt-2 border-t border-gray-300'>
+            <div className='flex items-center gap-4 text-text-secondary text-sm pt-2 border-t border-mute-4'>
                 <div className='flex items-center gap-1 cursor-pointer' onClick={handleLike}>
                     <Heart className={`w-4 h-4  ${likes.includes(currentUser._id) && 'fill-red-500 text-red-500'} `} />
                     <span>{likes.length}</span>
                 </div>
                 <div className='flex items-center gap-1 cursor-pointer' onClick={handleSave}>
-                    <Bookmark className={`w-4 h-4 ${isSaved && 'fill-indigo-500 text-indigo-500'}`} />
+                    <Bookmark className={`w-4 h-4 ${isSaved && 'fill-accent text-accent'}`} />
                 </div>
             </div>
 

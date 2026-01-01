@@ -84,8 +84,8 @@ const RecentMessages = () => {
     }, [user, getRecentMessages])
 
     return (
-        <div ref={containerRef} className='bg-white rounded-md shadow p-4 mt-4 max-w-xs min-h-20 text-xs text-slate-800 mb-4'>
-            <h3 className='font-semibold mb-4 text-slate-600 text-sm'>Recent Messages</h3>
+        <div ref={containerRef} className='bg-plain rounded-md shadow p-4 mt-4 max-w-xs min-h-20 text-xs text-title mb-4'>
+            <h3 className='font-semibold mb-4 text-subtitle text-sm'>Recent Messages</h3>
 
             <div className='flex flex-col max-h-55 overflow-y-scroll no-scrollbar '>
                 {
@@ -94,7 +94,7 @@ const RecentMessages = () => {
                             className='flex items-center gap-2 py-3 cursor-pointer'>
                             <div className='img-sec flex-shrink-0 relative'>
                                 <img src={msg.from_user_id.profile_picture} alt="pfp" className='w-10 h-10 rounded-full object-cover shadow' />
-                                <div className="dot absolute top-[-.25rem] right-0 w-3 h-3 bg-indigo-500 rounded-full border-2 border-white"></div>
+                                <div className="dot absolute top-[-.25rem] right-0 w-3 h-3 bg-accent rounded-full border-2 border-plain"></div>
                             </div>
 
 
@@ -103,16 +103,16 @@ const RecentMessages = () => {
                                     <p className='font-medium'>
                                         {msg.from_user_id.full_name}
                                     </p>
-                                    <p className='text-xs text-gray-500'>
+                                    <p className='text-xs text-mute-2'>
                                         {moment(msg.createdAt).fromNow()}
                                     </p>
                                 </div>
                                 <div className='flex justify-between'>
-                                    <p className='text-gray-500'>
+                                    <p className='text-mute-2'>
                                         {msg.isOutgoing && 'You: '}
                                         {msg.text ? msg.text : 'Photo 📷'}
                                     </p>
-                                    {!msg.seen && <p className='bg-indigo-500 text-xs text-white w-4 h-4  flex items-center justify-center rounded-full'>1</p>}
+                                    {!msg.seen && <p className='bg-accent text-xs text-plain w-4 h-4  flex items-center justify-center rounded-full'>1</p>}
 
 
                                 </div>

@@ -114,7 +114,7 @@ const Profile = () => {
     <div className="relative overflow-y-scroll h-full p-6 ">
       <div className="max-w-3xl mx-auto">
 
-        <div className="bg-white rounded-3xl shadow overflow-hidden">
+        <div className="bg-plain rounded-3xl shadow overflow-hidden">
           {/* profile cover photo  */}
           <div className="h-40 md:h-56 bg-gradient-to-r from-indigo-200  via-purple-200 to-pink-200">
             {user.cover_picture && <img src={user.cover_picture} alt="Profile Cover" className="w-full h-full object-cover" />}
@@ -125,7 +125,7 @@ const Profile = () => {
         </div>
 
         {/* tabs  */}
-        <div className="mt-6 rounded-md bg-white shadow p-1 mx-auto max-w-md">
+        <div className="mt-6 rounded-md bg-plain shadow p-1 mx-auto max-w-md">
           <div className="flex gap-1">
             {
               (() => {
@@ -136,7 +136,7 @@ const Profile = () => {
                 }
                 return tabs.map((tab, index) => (
                   <button key={index} onClick={() => setCurrentTab(tab)}
-                    className={`rounded-md text-sm transition-colors cursor-pointer flex-1 py-2 px-4 ${currentTab === tab ? "bg-indigo-500 text-white" : " text-gray-600 hover:bg-gray-200"}`} >
+                    className={`rounded-md text-sm transition-colors cursor-pointer flex-1 py-2 px-4 ${currentTab === tab ? "bg-accent text-plain" : " text-text-secondary hover:bg-muted"}`} >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
 
                   </button>
@@ -166,7 +166,7 @@ const Profile = () => {
                       post.image_urls.map((img, index) => (
                         <Link key={index} target="_blank" to={img} className="relative group">
                           <img src={img} alt="post" className="w-64 aspect-video object-cover" />
-                          <p className="absolute bottom-1 right-1 text-xs p-1 px-3 backdrop-blur-xl transition duration-300 text-white opacity-0 group-hover:opacity-100">Posted {moment(post.createdAt).fromNow()}</p>
+                          <p className="absolute bottom-1 right-1 text-xs p-1 px-3 backdrop-blur-xl transition duration-300 text-plain opacity-0 group-hover:opacity-100">Posted {moment(post.createdAt).fromNow()}</p>
                         </Link>
                       ))
                     }
@@ -185,7 +185,7 @@ const Profile = () => {
               {savedPosts.length > 0 ? (
                 savedPosts.map((post) => (<PostCard key={post._id} post={post} />))
               ) : (
-                <div className="text-center py-12 text-gray-500">
+                <div className="text-center py-12 text-mute-2">
                   <p className="text-lg font-medium">No saved posts yet</p>
                   <p className="text-sm mt-2">Posts you save will appear here</p>
                 </div>
@@ -202,7 +202,7 @@ const Profile = () => {
               {likedPosts.length > 0 ? (
                 likedPosts.map((post) => (<PostCard key={post._id} post={post} />))
               ) : (
-                <div className="text-center py-12 text-gray-500">
+                <div className="text-center py-12 text-mute-2">
                   <p className="text-lg font-medium">No liked posts yet</p>
                   <p className="text-sm mt-2">Posts you like will appear here</p>
                 </div>
